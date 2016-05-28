@@ -76,3 +76,4 @@ pip-selfcheck.json
 
 #Project files
 dataset*
+src/*.db
