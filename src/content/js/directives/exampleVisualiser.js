@@ -9,7 +9,7 @@ angular.module('observer').
             replace: true,
             templateUrl: 'views/exampleVisualiser.html',
             controller: ['$scope', function ($scope) {
-
+                $scope.max = Math.max
             }]
         };
     }]);
