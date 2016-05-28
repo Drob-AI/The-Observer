@@ -20,7 +20,15 @@ def delete_dataset_info():
 @FLASK.route("/create-datasets")
 def create_dataset_info():
     models = [
-        Dataset('Daily Weather Observations for Canberra, Australian Capital Territory for May 2016', 'Observations from Canberra Airport.', 'Observations were drawn from Canberra Airport(station 070351)','src/mod_suggest/datasets/dummy.csv', time.time())
+        Dataset('Daily Weather Observations for Canberra, Australian Capital Territory for May 2016', 'Observations from Canberra Airport.', 'Observations were drawn from Canberra Airport(station 070351)','src/mod_suggest/datasets/dummy.csv', time.time()),
+        Dataset('Prediction of Gene/Protein Function and Localization',
+                'The genomes of several organisms have now been completely sequenced, including the human genome depending on one\'s definition of "completely" :-). Interest within bioinformatics is therefore shifting somewhat away from sequencing, to learning about the genes encoded in the sequence. Genes code for proteins, and these proteins tend to localize in various parts of cells and interact with one another, in order to perform crucial functions. The present data set consists of a variety of details about the various genes of one particular type of organism. Gene names have been anonymized and a subset of the genes have been withheld for testing',
+                 'Observations were drawn from Canberra Airport(station 070351)',
+                 'src/mod_suggest/datasets/interaction_relations.csv', time.time()),
+        Dataset('International Comparison Program ',
+                'The genomes of several organisms have now been completely sequenced, including the human genome depending on one\'s definition of "completely" :-). Interest within bioinformatics is therefore shifting somewhat away from sequencing, to learning about the genes encoded in the sequence. Genes code for proteins, and these proteins tend to localize in various parts of cells and interact with one another, in order to perform crucial functions. The present data set consists of a variety of details about the various genes of one particular type of organism. Gene names have been anonymized and a subset of the genes have been withheld for testing',
+                 'Data are sourced from the World Bank, International Comparison Program database. One dataset is provided: PPP conversion factor, GDP (LCU per international $)',
+                 'src/mod_suggest/datasets/ppp_countries.csv', time.time())
     ]
 
     DB.session.add_all(models)
