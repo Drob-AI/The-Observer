@@ -3,7 +3,7 @@
         <thead>
             <tr class="dark">
                 <th ng-repeat="val in fields.slice(0,5) track by $index">{{val}}</th>
-                <th ng-if="fields.length > 5">{{max(0, fields.length - 5)}} omitted</th>
+                <th ng-if="fields.length > 5">{{ max(0, fields.length - 5) + ' omitted' }}</th>
             </tr>
         </thead>
         <tbody>
