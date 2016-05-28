@@ -32,7 +32,7 @@ angular.module('observer').
                 personal: true,
                 description: text,
                 fields: ['Date', 'MinTemp', 'MaxTemp', 'Rain'],
-                fieldTypes: ['DateTime', 'Double', 'Double', 'Int'],
+                fieldTypes: ['string', 'Double', 'Double', 'Int'],
                 data: datasetExamplesWeather
             },
             {
@@ -41,7 +41,7 @@ angular.module('observer').
                 userSubmitted: true,
                 description: text,
                 fields: ['Date', 'Author', 'Title', 'Content', 'Category', 'ViewCount', 'Tags'],
-                fieldTypes: ['DateTime', 'String', 'String', 'Text', 'String', 'Number', 'String'],
+                fieldTypes: ['string', 'string', 'string', 'string', 'string', 'number', 'string'],
                 data: datasetExamples
             },
             {
@@ -50,7 +50,7 @@ angular.module('observer').
                 userSubmitted: true,
                 description: text,
                 fields: ['Date', 'Author', 'Title', 'Content', 'Category', 'ViewCount', 'Tags'],
-                fieldTypes: ['DateTime', 'String', 'String', 'Text', 'String', 'Number', 'String'],
+                fieldTypes: ['string', 'string', 'string', 'string', 'string', 'number', 'string'],
                 data: datasetExamples
             },
             {
@@ -58,7 +58,7 @@ angular.module('observer').
                 name: 'UFO Sightings',
                 description: text,
                 fields: ['Date', 'Author', 'Title', 'Content', 'Category', 'ViewCount', 'Tags'],
-                fieldTypes: ['DateTime', 'String', 'String', 'Text', 'String', 'Number', 'String'],
+                fieldTypes: ['string', 'string', 'string', 'string', 'string', 'number', 'string'],
                 data: datasetExamples
             },
             {
@@ -66,7 +66,7 @@ angular.module('observer').
                 name: 'Weather Data',
                 description: text,
                 fields: ['Date', 'Author', 'Title', 'Content', 'Category', 'ViewCount', 'Tags'],
-                fieldTypes: ['DateTime', 'String', 'String', 'Text', 'String', 'Number', 'String'],
+                fieldTypes: ['string', 'string', 'string', 'string', 'string', 'number', 'string'],
                 data: datasetExamples
             },
             {
@@ -74,7 +74,7 @@ angular.module('observer').
                 name: 'KGB secret documents',
                 description: text,
                 fields: ['Date', 'Author', 'Title', 'Content', 'Category', 'ViewCount', 'Tags'],
-                fieldTypes: ['DateTime', 'String', 'String', 'Text', 'String', 'Number', 'String'],
+                fieldTypes: ['string', 'string', 'string', 'string', 'string', 'number', 'string'],
                 data: datasetExamples
             },
             {
@@ -82,7 +82,7 @@ angular.module('observer').
                 name: '9/11 Reports',
                 description: text,
                 fields: ['Date', 'Author', 'Title', 'Content', 'Category', 'ViewCount', 'Tags'],
-                fieldTypes: ['DateTime', 'String', 'String', 'Text', 'String', 'Number', 'String'],
+                fieldTypes: ['string', 'string', 'string', 'string', 'string', 'number', 'string'],
                 data: datasetExamples
             },
             {
@@ -90,7 +90,7 @@ angular.module('observer').
                 name: 'UFO Sightings',
                 description: text,
                 fields: ['Date', 'Author', 'Title', 'Content', 'Category', 'ViewCount', 'Tags'],
-                fieldTypes: ['DateTime', 'String', 'String', 'Text', 'String', 'Number', 'String'],
+                fieldTypes: ['string', 'string', 'string', 'string', 'string', 'number', 'string'],
                 data: datasetExamples
             }
         ];

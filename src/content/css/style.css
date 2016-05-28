@@ -108,7 +108,7 @@ header .title {
 
 header .title::first-letter {
 	color: #7197A8;
-	font-weight: bold;
+	font-weight: bold;field-overview
 }
 
 header .header-content .header-menu {
@@ -419,4 +419,25 @@ header .header-content a.tab:hover div {
 	background-color: #032331;
 	color: #7197A8;
 	border: 1px solid #103B4E;
+}
+
+.a-bit-down {
+	margin-top: 25px;
+}
+
+.right-separator {
+	border-right: 1px solid #506078;
+}
+
+.field-overview {
+	height: 280px;
+	padding: 25px 0px;
+}
+
+.row.underline {
+	border-bottom: 1px solid #032331;
+}
+
+div.jqcloud span.w4, div.jqcloud span.w3, div.jqcloud span.w2, div.jqcloud span.w1 {
+	font-family: 'Open Sans Condensed', sans-serif;
 }
