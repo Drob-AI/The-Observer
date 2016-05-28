@@ -65,6 +65,10 @@ angular.module('observer').
                 $scope.isNumber = function(field) {
                     return $scope.fieldTypes[field] === 'number';
                 }
+
+                $scope.showOverview = function () {
+                    return $scope.isSingleField() || $scope.isFieldComparison();
+                }
             }]
         };
     }]);

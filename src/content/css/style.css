@@ -422,6 +422,10 @@ header .header-content a.tab:hover div {
 	border: 1px solid #103B4E;
 }
 
+body > div > div > div.medium-dark.padded.ng-scope > div.field-selector.container.dark.ng-isolate-scope > div > div.col-md-3.text-right > span > input {
+	margin-top: 15px !important;
+}
+
 .a-bit-down {
 	margin-top: 25px;
 }
@@ -434,8 +438,10 @@ header .header-content a.tab:hover div {
 	height: 280px;
 }
 
-.padded{
+.padded {
 	padding: 25px 0px;
+	min-height: 330px;
+	border-bottom: 5px solid #032331;
 }
 
 .row.underline {
@@ -444,4 +450,8 @@ header .header-content a.tab:hover div {
 
 div.jqcloud span.w4, div.jqcloud span.w3, div.jqcloud span.w2, div.jqcloud span.w1 {
 	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.fuck-you {
+	visibility: hidden;
 }
