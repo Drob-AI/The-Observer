@@ -16,7 +16,8 @@ class DatasetParser:
         self.file_data = lines
 
     def _parse_row(self, row):
-        result = [ float(field) if field.isdigit() or self._is_float(field) else field
+
+        result = [ float(field) if isinstance(field, numbers.Number) or field.isdigit() or self._is_float(field) else field
                             for field in row]
 
         return [np.nan if (not field) or field == 'nan' else field for field in result]
@@ -34,6 +35,7 @@ class DatasetParser:
     def _calculate_feature_stats(self, feature):
         is_float = all([isinstance(x, numbers.Number) for x in feature])
         stats = {}
+        # print(feature, is_float)
         if(is_float):
             stats = {'type': 'number', 'min': np.nanmin(feature), 'max': np.nanmax(feature),
                       'q1':np.nanpercentile(feature, 25), 'q3':np.nanpercentile(feature, 75),
@@ -42,7 +44,6 @@ class DatasetParser:
                       'avr': np.average(feature)}
         else:
             counted = {}
-            # {'text': "golem kur", weight: 13}
             for nominal in feature:
                 nominal
                 if nominal in counted:
@@ -57,7 +58,11 @@ class DatasetParser:
 
     def _calculate_statistics(self):
         result = []
+        print(self.file_data)
         transposed = np.array(self.file_data).T
+        print(transposed)
+
+        print(len(transposed[0]))
         for field in transposed:
             field = self._parse_row(field)
             result.append(self._calculate_feature_stats(field))
@@ -69,7 +74,19 @@ class DatasetParser:
         if(not(not field) and field[0] == '-'):
             field = field[1:]
 
+        # TODO please forgive me!
+        field = str.replace(field , 'e-', '')
+        field = str.replace(field , 'E-', '')
         partition = field.partition('.')
+
+        if(not ((partition[0].isdigit() and partition[1]=='.'
+            and partition[2].isdigit() or (partition[0]==''
+            and partition[1]=='.' and partition[2].isdigit())
+            or (partition[0].isdigit()
+            and partition[1]=='.'
+            and partition[2]=='')))):
+            print(partition)
+
         return (partition[0].isdigit() and partition[1]=='.'
             and partition[2].isdigit() or (partition[0]==''
             and partition[1]=='.' and partition[2].isdigit())
