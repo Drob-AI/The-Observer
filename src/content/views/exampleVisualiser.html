@@ -2,14 +2,14 @@
     <table class="table light table-condensed">
         <thead>
             <tr class="dark">
-                <th ng-repeat="val in fields track by $index">{{val}}</th>
-                <th>{{max(0, fields.length - 5)}} omitted</th>
+                <th ng-repeat="val in fields.slice(0,5) track by $index">{{val}}</th>
+                <th ng-if="fields.length > 5">{{ max(0, fields.length - 5) + ' omitted' }}</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="row in examples track by $index">
-                <td ng-repeat="val in row track by $index">{{val}}</td>
-                <td class="dark"></td>
+            <tr ng-repeat="row in examples.slice(0,5) track by $index">
+                <td ng-repeat="val in row.slice(0,5) track by $index">{{val}}</td>
+                <td ng-if="fields.length > 5" class="dark"></td>
             </tr>
         </tbody>
     </table>
