@@ -10,6 +10,14 @@ from src.mod_suggest.models import Dataset
 
 from flask import request
 
+@FLASK.route('/')
+def root():
+    return FLASK.send_static_file('index.html')
+
+@FLASK.route('/<path:path>')
+def static_proxy(path):
+  # send_static_file will guess the correct MIME type
+  return FLASK.send_static_file(path)
 
 @FLASK.route("/delete-datasets")
 def delete_dataset_info():

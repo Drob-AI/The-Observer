@@ -99,6 +99,8 @@ angular.module('observer').
             return $http({
                 method: 'GET',
                 url: 'http://localhost:5000/datasets/all'
+            }).then(function (aaaa) {
+                return aaaa.data;
             });
         }
 

@@ -13,7 +13,7 @@ DEBUG = True
 
 
 
-FLASK = Flask(__name__)
+FLASK = Flask(__name__, static_url_path='/')
 
 # FLASK.config['DATABASE'] = '/tmp/flaskr.db'
 # FLASK.config['DEBUG'] = True
