@@ -33,4 +33,13 @@ angular.module('observer').
 	      {text: "golem kur", weight: 2},
 	      {text: "ut ultrices", weight: 2}
     	];
+
+    	$scope.myJson = {
+		    "type" : 'line',
+		    "background-color" : '#467488',
+		    "series" : [
+		      { "values" : [54,23,34,23,43] },
+		      { "values" : [10,15,16,20,40] }
+		    ]
+		};
     }]);
