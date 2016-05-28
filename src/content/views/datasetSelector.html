@@ -1,8 +1,8 @@
-<div class="dataset-selector medium-light">
+<div class="dataset-selector medium-light" data-ng-class="{'empty': !selected && !expanded}">
 	<div data-ng-class="{'visible': expanded}" class="overlay">
 	</div>
 	<div class="container">
-		<div data-ng-if="!selected" class="selected empty" data-ng-click="toggleMenu()">
+		<div data-ng-if="!selected" class="selected" data-ng-click="toggleMenu()">
 			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
 			SELECT A DATASET
 			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
@@ -13,9 +13,14 @@
 			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
 		</div>
 		<div class="datasets" data-ng-class="{'visible': expanded}">
+			<div class="dataset-filter">
+				<div class="light filter" data-ng-click="filterBy(personalFilter)">Personal</div>
+				<div class="user-submitted filter" data-ng-click="filterBy(userFilter)">User</div>
+				<div class="dark filter" data-ng-click="filterBy(public)">Public</div>
+			</div>
 			<div class="dataset"
 				ng-show="expanded"
-				data-ng-repeat="dataset in datasets"
+				data-ng-repeat="dataset in datasets | filter:datasetFilter"
 				data-ng-class="{
 					'personal': dataset.personal,
 					'user-submitted': dataset.userSubmitted

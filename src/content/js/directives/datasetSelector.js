@@ -9,6 +9,24 @@ angular.module('observer').
             replace: true,
             templateUrl: 'views/datasetSelector.html',
             controller: ['$scope', function ($scope) {
+                $scope.personalFilter = function (dataset) {
+                    return dataset.personal;
+                }
+
+                $scope.userFilter = function (dataset) {
+                    return dataset.userSubmitted;
+                }
+
+                $scope.public = function (dataset) {
+                    return !dataset.personal && !dataset.userSubmitted;
+                }
+
+                $scope.filterBy = function (filter) {
+                    $scope.datasetFilter = filter;
+                }
+
+                $scope.datasetFilter = $scope.personalFilter;
+
                 $scope.expanded = false;
 
                 $scope.selectDataset = function (dataset) {

@@ -1,0 +1,15 @@
+<div class="light field-selector">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-md-12 fields">
+                <span data-ng-repeat="field in fields | filter:fieldFilter"
+                      class="field"
+                      data-ng-class="{'selected': isSelected(field)}"
+                      data-ng-click="selectField(field)">
+                    {{field}}
+                </span>
+            </div>
+            <h4 class="form-inline"><input type="text" data-ng-model="filterText" class="form-control" placeholder="Filter Fields"></h4>
+        </div>
+    </div>
+</div>
