@@ -108,7 +108,7 @@ header .title {
 
 header .title::first-letter {
 	color: #7197A8;
-	font-weight: bold;
+	font-weight: bold;field-overview
 }
 
 header .header-content .header-menu {
@@ -383,7 +383,8 @@ header .header-content a.tab:hover div {
 }
 
 .field-selector {
-	min-height: 100px;
+	height: 68px;
+	border-bottom: 2px solid #103B4E;
 }
 
 .field-selector .fields {
@@ -419,4 +420,38 @@ header .header-content a.tab:hover div {
 	background-color: #032331;
 	color: #7197A8;
 	border: 1px solid #103B4E;
+}
+
+body > div > div > div.medium-dark.padded.ng-scope > div.field-selector.container.dark.ng-isolate-scope > div > div.col-md-3.text-right > span > input {
+	margin-top: 15px !important;
+}
+
+.a-bit-down {
+	margin-top: 25px;
+}
+
+.right-separator {
+	border-right: 1px solid #506078;
+}
+
+.field-overview {
+	height: 280px;
+}
+
+.padded {
+	padding: 25px 0px;
+	min-height: 330px;
+	border-bottom: 5px solid #032331;
+}
+
+.row.underline {
+	border-bottom: 1px solid #032331;
+}
+
+div.jqcloud span.w4, div.jqcloud span.w3, div.jqcloud span.w2, div.jqcloud span.w1 {
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.fuck-you {
+	visibility: hidden;
 }

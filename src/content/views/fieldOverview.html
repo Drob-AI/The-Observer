@@ -1,9 +1,40 @@
-<div class="light field-overview">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-
+<div class="container field-overview primary">
+    <div class="row fixed-height">
+        <div class="col-md-12 fixed-height" data-ng-if="isSingleField()">
+            <div class="row fixed-height">
+                <div class="col-md-4 fixed-height right-separator">
+                    <div class="row a-bit-down underline">
+                        <div class="col-md-6">
+                            <h4><b>Field Name:</b></h4>
+                        </div>
+                        <div class="col-md-6">
+                                <h4>{{fields[selectedFields.firstField]}}</h4>
+                        </div>
+                    </div>
+                    <div class="row underline">
+                        <div class="col-md-6">
+                            <h4><b>Field Type:</b></h4>
+                        </div>
+                        <div class="col-md-6">
+                                <h4>{{fieldTypes[selectedFields.firstField]}}</h4>
+                        </div>
+                    </div>
+                    <div class="row underline">
+                        <div class="col-md-6">
+                            <h4><b>Field Mode:</b></h4>
+                        </div>
+                        <div class="col-md-6">
+                                <h4>Froinden</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 fixed-height dark" data-ng-if="isString(selectedFields.firstField)">
+                    <jqcloud words="words" colors="{{colors}}" width="600" height="220" steps="4" font-size="{from:0.06, to:0.03}" center='{x: 0.5, y:0.5}' shape='elliptic'></jqcloud>
+                </div>
             </div>
+        </div>
+        <div class="col-md-12" data-ng-if="isFieldComparison()">
+            Compare
         </div>
     </div>
 </div>
