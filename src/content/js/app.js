@@ -1,4 +1,4 @@
-angular.module('observer', ['ngRoute', 'angular-jqcloud']).
+angular.module('observer', ['ngRoute', 'angular-jqcloud', 'ngResource']).
     config(function ($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: '/views/root.html',

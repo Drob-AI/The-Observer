@@ -1,5 +1,5 @@
 angular.module('observer').
-    service('DatasetRepository', ['$q', function ($q) {
+    service('DatasetRepository', ['$q', '$http', function ($q, $http) {
         var text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor vitae nisl vitae laoreet. Nunc vitae vulputate libero. Fusce magna elit, placerat sed efficitur et, tincidunt ac magna. Phasellus lobortis interdum nisi id molestie. Phasellus mollis mauris  ultrices, aliquet tellus quis, semper nisi. Quisque efficitur tincidunt metus eget efficitur. Suspendisse gravida aliquet odio et convallis. Sed mollis risus vitae massa volutpat pharetra. In nec nibh odio. Quisque purus lorem, accumsan et dapibus eu, aliquet non odio. Nulla id felis elit. Pellentesque in tempus dolor. In vulputate, diam sit amet pellentesque sollicitudin, nulla urna vestibulum urna, sed dictum ligula tellus sit amet erat. Proin id venenatis libero. Suspendisse a consectetur leo.';
 
         var datasetExamples = [
@@ -96,7 +96,10 @@ angular.module('observer').
         ];
 
         function getAll() {
-            return $q.when(datasets);
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:5000/datasets/all'
+            });
         }
 
         function getById(id) {
