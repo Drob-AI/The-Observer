@@ -3,7 +3,7 @@ import json
 import sys
 import numpy as np
 import numbers
-
+from scipy import stats
 class DatasetParser:
     def __init__(self, file_path):
         self.file_data = open(file_path, 'r')
@@ -36,10 +36,13 @@ class DatasetParser:
         # print(is_float, feature)
         stats = {}
         if(is_float):
-            stats = {'min': np.nanmin(feature), 'max': np.nanmax(feature),
-                      'q1':np.nanpercentile(feature, 25), 'q3':np.nanpercentile(feature, 75),
-                      'median':np.nanmedian(feature), 'mean': np.nanmean(feature),
-                      'variance': np.nanvar(feature), 'std': np.nanstd(feature)}
+            stats = {'type': 'number', 'min': np.amin(feature), 'max': np.amax(feature),
+                      'q1':np.percentile(feature, 25), 'q3':np.percentile(feature, 75),
+                      'median':np.median(feature), 'mean': np.mean(feature),
+                      'variance': np.var(feature), 'std': np.std(feature),
+                      'avr': np.average(feature)}
+        else:
+            stats = {'type':'string'}
 
         return stats
 
@@ -65,6 +68,19 @@ class DatasetParser:
             and partition[1]=='.'
             and partition[2]==''))
 
+    def _clear_info(self, dataset_info):
+        for field_stats in dataset_info['statstics']:
+            for key in field_stats:
+                if(key != 'type' and np.isnan(field_stats[key])):
+                    field_stats[key] = None
+
+        for field_stats in dataset_info['cov_matrix']:
+            for index, x in enumerate(field_stats):
+                if(np.isnan(x)):
+                    field_stats[index] = None
+
+        return dataset_info
+
     def dataset_to_json(self, dataset_info):
         del dataset_info['path']
         dataset_info['fields'] = self.file_data[0]
@@ -73,6 +89,11 @@ class DatasetParser:
 
         # TODO do it!
         dataset_info['statstics'] = self._calculate_statistics()
+
+        # print(dataset_info['statstics'])
+        # for l in dataset_info['statstics']:
+        #     print(l)
+
 
         dataset_info['size'] = {'mb':sys.getsizeof(self.file_data), 'count': len(self.file_data)}
         # TODO do it!
@@ -84,5 +105,23 @@ class DatasetParser:
         transposed = [self._parse_row(field) for field in np.array(self.file_data).T]
 
         all_number_sets = filter(lambda feature: all([isinstance(x, numbers.Number) for x in feature]), transposed)
+
+        number_rows_stats = filter(lambda x: x['type'] == 'number', dataset_info['statstics'])
+
+        print(len(number_rows_stats), len(all_number_sets))
+        # print(number_rows_stats)
+
+        result = []
+        for index, column in enumerate(all_number_sets):
+            result.append([])
+            for x in column:
+                if np.isnan(x):
+                    result[-1].append(number_rows_stats[index]['avr'])
+                else:
+                    result[-1].append(x)
+
         dataset_info['cov_matrix'] = np.corrcoef(all_number_sets).tolist()
-        return json.dumps(dataset_info)
+        dataset_info['stastic_test'] = [stats.pearsonr(numberse1, numberse2) for numberse1 in all_number_sets for numberse2 in all_number_sets]
+
+
+        return json.dumps(self._clear_info(dataset_info))

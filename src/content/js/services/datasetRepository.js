@@ -17,15 +17,23 @@ angular.module('observer').
             [1464347453828, 'John Smith', 'ISIS on UFO sightings', text, 'war on terror'],
         ]
 
+        var datasetExamplesWeather = [
+            [1463396525947, -3.0, 5.0, 125],
+            [1463569649537, -2.0, 5.0, 175],
+            [1463742510697, -1.0, 3.0, 165],
+            [1463828968247, 1.0, 13.0, 105],
+            [1463829968247, 5.0, 13.0, 125]
+        ];
+
         var datasets = [
             {
                 id: 0,
                 name: 'Weather Data',
                 personal: true,
                 description: text,
-                fields: ['Date', 'Author', 'Title', 'Content', 'Category', 'ViewCount', 'Tags'],
-                fieldTypes: ['DateTime', 'String', 'String', 'Text', 'String', 'Number', 'String'],
-                data: datasetExamples
+                fields: ['Date', 'MinTemp', 'MaxTemp', 'Rain'],
+                fieldTypes: ['DateTime', 'Double', 'Double', 'Int'],
+                data: datasetExamplesWeather
             },
             {
                 id: 1,
