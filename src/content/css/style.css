@@ -383,7 +383,8 @@ header .header-content a.tab:hover div {
 }
 
 .field-selector {
-	min-height: 100px;
+	height: 68px;
+	border-bottom: 2px solid #103B4E;
 }
 
 .field-selector .fields {
@@ -431,6 +432,9 @@ header .header-content a.tab:hover div {
 
 .field-overview {
 	height: 280px;
+}
+
+.padded{
 	padding: 25px 0px;
 }
 
