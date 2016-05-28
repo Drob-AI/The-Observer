@@ -197,6 +197,15 @@ header .header-content a.tab:hover div {
 	text-align: center;
 	position: relative;
 	height: 90px;
+	transition: all 0.5s;
+}
+
+.dataset-selector.empty {
+	margin-top: calc(50vh - 148px - 40px);
+	padding: 80px 0;
+	height: 250px;
+    box-shadow: 0px 0px 30px black;
+	transition: all 0.5s 0.5s;
 }
 
 .dataset-selector .selected {
@@ -222,7 +231,7 @@ header .header-content a.tab:hover div {
 }
 
 .dataset-selector .datasets.visible {
-	height: 400px;
+	max-height: 400px;
 }
 .dataset-selector .datasets {
 	position: absolute;
@@ -232,9 +241,10 @@ header .header-content a.tab:hover div {
 	transform: translate(-50%, 0);
 	box-shadow: 0px 2px 3px #103B4E;
 	border-radius: 0px 0px 5px 5px;
-	background-color: #032331;
+	background-color: #27566B;
 	transition: all 0.5s;
-	height: 0px;
+	height: auto;
+	max-height: 0px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
@@ -257,6 +267,10 @@ header .header-content a.tab:hover div {
 
 .dataset-selector .datasets .dataset.user-submitted {
 	color: #032331;
+	background: #506078;
+}
+
+.user-submitted {
 	background: #506078;
 }
 
@@ -291,6 +305,26 @@ header .header-content a.tab:hover div {
 	overflow: auto;
 }
 
+.dataset-selector .datasets .dataset-filter {
+	width: 100%;
+	display: flex;
+	height: 50px;
+}
+
+.dataset-selector .datasets .dataset-filter .filter {
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	flex-grow: 1;
+	cursor: pointer;
+	font-size: 22px;
+}
+
+.dataset-selector .datasets .dataset-filter .filter:hover {
+	background-color: #467488 !important;
+	color: #032331 !important;
+}
+
 .overlay {
 	position: fixed;
 	top: 237px;
@@ -299,6 +333,10 @@ header .header-content a.tab:hover div {
 	background-color: black;
 	opacity: 0;
 	pointer-events: none;
+	transition: all 0.5s 0.5s;
+}
+
+.empty .overlay {
 	transition: all 0.5s;
 }
 
@@ -342,4 +380,43 @@ header .header-content a.tab:hover div {
 
 .dataset-overview table.table tr th {
 	white-space: nowrap !important;
+}
+
+.field-selector {
+	min-height: 100px;
+}
+
+.field-selector .fields {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.field-selector .field {
+	font-size: 20px;
+	background: #032331;
+	border: 2px solid #103B4E;
+	padding: 8px;
+	margin: 2px;
+	color: #7197A8;
+	cursor: pointer;
+}
+
+.field-selector .field.selected {
+	background: #506078;
+	color: #032331;
+}
+
+.field-selector .field:hover {
+	border: 2px solid #27566B;
+	color: #506078;
+}
+
+.field-selector .field.selected:hover {
+	color: #103B4E;
+}
+
+.form-control {
+	background-color: #032331;
+	color: #7197A8;
+	border: 1px solid #103B4E;
 }
