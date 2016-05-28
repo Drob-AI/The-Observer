@@ -1,0 +1,146 @@
+body {
+	background-color: #27566B;
+	font-family: 'Open Sans Condensed', sans-serif;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+.dark {
+	background-color:#032331;
+	color: #467488;
+}
+
+header {
+	margin-top: 12px;
+	position: relative;
+}
+
+.space {
+	padding-top: 18px;
+	padding-bottom: 18px;
+}
+
+.rel {
+	position: relative;
+}
+
+.logo {
+	position: absolute;
+	left: 0;
+	background: url('../images/logo.png');
+	background-size: 100% 100%;
+	width: 100px;
+	height: 100px;
+}
+
+header .container {
+	height: 136px;
+}
+
+header .header-content {
+	position: absolute;
+	height: 100px;
+	left: 100px;
+	right: -100%;
+}
+
+header .headerContainer {
+	width: calc(1170px - 100px);
+	position: relative;
+	height: 100%;
+}
+
+header .title {
+	position: absolute;
+	left: 25px;
+	top: 4px;
+	height: 40px;
+	font-size: 50px;
+	line-height: 40px;
+}
+
+header .title::first-letter {
+	color: #7197A8;
+	font-weight: bold;
+}
+
+header .header-content .header-menu {
+	height: 52px;
+	border-bottom: 4px solid #27566B;
+}
+
+header .header-content .header-tabs {
+	height: 48px;
+}
+
+.right {
+	position: absolute;
+	height: 100%;
+	right: 0;
+}
+
+header .header-content a.tab {
+	height: 0;
+    display: block;
+	cursor: pointer;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid #27566B;
+	color: 467488;
+	line-height: 0;
+	float: right;
+	position: relative;
+}
+
+header .header-content a.tab.selected div {
+	border-bottom: 50px solid #27566B;
+	color: #032331;
+}
+
+header .header-content a.tab:hover {
+	text-decoration: none;
+}
+
+header .header-content a.tab:first-of-type {
+	border-bottom: 50px solid transparent;
+}
+
+header .header-content a.tab div {
+	position: relative;
+	top: 0;
+
+	margin-right: -44px;
+	height: 50px;
+	font-size: 24px;
+	display: block;
+    border-right: 50px solid transparent;
+    border-bottom: 50px solid #032331;
+	line-height: 50px;
+}
+
+header .header-content a.tab .tab-triangle {
+	left: -50px;
+	top: 0;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 50px 50px 0;
+	border-color: transparent #032331 transparent transparent;
+}
+
+header .header-content a.tab.selected .tab-triangle {
+	border-color: transparent #27566B transparent transparent;
+}
+
+header .header-content a.tab:hover .tab-triangle {
+	border-color: transparent #7197A8 transparent transparent;
+}
+
+header .header-content a.tab:hover div {
+	border-bottom: 50px solid #7197A8;
+	color: #103B4E;
+}
+
+.clearfix {
+	float: none;
+}
