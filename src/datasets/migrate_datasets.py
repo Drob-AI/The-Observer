@@ -1,25 +1,24 @@
 import sqlite3
+import time
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 
 # configuration
-DATABASE = '/tmp/flaskr.db'
+DATABASE = './flaskr.db'
 DEBUG = True
-SECRET_KEY = 'admin'
-USERNAME = 'admin'
-PASSWORD = 'admin'
+# SECRET_KEY = 'admin'
+# USERNAME = 'admin'
+# PASSWORD = 'admin'
 
-# create our little application :)
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 def init_db():
-    print("fua");
     with closing(connect_db()) as db:
-        print(db)
         with app.open_resource('schema.sql', mode='r') as f:
             db.cursor().executescript(f.read())
             print(f)
@@ -30,4 +29,3 @@ def connect_db():
 
 if __name__ == '__main__':
     init_db()
-    app.run()

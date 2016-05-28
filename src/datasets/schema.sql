@@ -4,5 +4,6 @@ create table datasets (
   name text not null,
   description text,
   source text
-  date integer not null
+  date float not null,
+  path text
 );
