@@ -1,0 +1,37 @@
+<div class="medium-dark dataset-overview">
+    <div class="container fixed-height">
+        <div class="row fixed-height">
+            <div class="col-md-2 light fixed-height fixed-text">
+                <h3>{{dataset.name}}</h3>
+                <p>{{dataset.description}}</p>
+            </div>
+            <div class="col-md-2 dark fixed-height">
+                <h3>Properties</h3>
+                <div class="row">
+                    <div class="col-md-3"><b>Features:</b></div>
+                    <div class="col-md-9">{{dataset.fields.length}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><b>Entries:</b></div>
+                    <div class="col-md-9">12445</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><b>Sources:</b></div>
+                    <div class="col-md-9">
+                        Bank of UK
+                        <br>
+                        Shipping International
+                        <br>
+                        New York Times
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" 
+                data-example-visualiser
+                data-fields="dataset.fields"
+                data-examples="dataset.data">
+
+            </div>
+        </div>
+    </div>
+</div>

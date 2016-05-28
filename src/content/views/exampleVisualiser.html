@@ -1,0 +1,16 @@
+<div class="fixed-height scrollable">
+    <table class="table primary table-condensed">
+        <thead>
+            <tr class="dark">
+                <th ng-repeat="val in fields track by $index">{{val}}</th>
+                <th>{{max(0, fields.length - 5)}} omitted</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in examples track by $index">
+                <td ng-repeat="val in row track by $index">{{val}}</td>
+                <td class="dark"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
