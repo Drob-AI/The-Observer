@@ -152,14 +152,70 @@ angular.module('observer').
     	};
 
 
-    	fieldnames = ['a1', 'a2', 'a3', 'a4', 'a5']
-    	coefs = [
-    		[1.0, 0.15, 0.35, 0.55, 0.75],
-    		[0.8, 0.15, 0.35, 0.55, 0.75],
-    		[0.6, 0.15, 0.35, 0.55, 0.75],
-    		[0.4, 0.15, 0.35, 0.55, 0.75],
-    		[0.2, 0.15, 0.35, 0.55, 0.75]
-    	]
+    	fieldnames = datasets[8].fields;
+    	coefs = datasets[8].cov_matrix;
+
+    	radarValues = datasets[8].statstics.map(
+    		function(i){
+    			return (i.type == "string" ?
+    			i.histogram.length :
+    			(i.type == "number" ? (i.std || 0) : 0));
+    		});
+    	radarDataBand = datasets[8].fields;
+
+    	$scope.radarJson = {
+		  "globals": {
+		    "font-family":'Open Sans Condensed',
+		    "shadow":false
+		  },
+			"type" : "radar",
+			"background-color":"#FFF",
+			"plot":{
+			  "aspect":"rose",
+			  "animation": {
+			    "effect":"ANIMATION_EXPAND_TOP",
+		      "sequence":"ANIMATION_BY_PLOT_AND_NODE",
+		      "speed":30
+			  }
+			},
+			"title" : {
+			  "text" : "Standard Deviation of attributes",
+			  "background-color":"#333",
+			  "font-size":"24px"
+			},
+			"scale-k":{
+		    "aspect":"circle",
+		    "visible":false
+		  },
+		  "scale-v":{
+		    "values":"0:25:5",
+		    "guide": {
+		      "line-width":1,
+		      "line-style":"solid",
+		      "line-color":"#333"
+		    },
+		    "item": {
+		      "color":"#333"
+		    },
+		    "line-color":"#FFF"
+		  },
+		  "tooltip": {
+		    "text":"%v st.dev. for %data-band",
+		    "background-color":"#CFF",
+		    "color":"#333",
+		    "font-size":"14px"
+		  },
+			"series" : [
+				{
+					"values" : radarValues,
+					"data-band" : radarDataBand,
+					//"tooltip-text" : "%v studio albums made by %data-band",
+					"url" : "http://www.google.com/#q=%data-band",
+					"target" : "_blank",
+					"background-color":"#0CF"
+				}
+			]
+		};
 
     	$scope.heatmapJson = {
             "type":"piano",
@@ -192,8 +248,8 @@ angular.module('observer').
                 },
                 "tick":{
                     "visible":false
-                },
-                "values":fieldnames
+                }//,
+                //"values":fieldnames
             },
             "scaleY":{
                 "zooming":true,
@@ -210,8 +266,8 @@ angular.module('observer').
                     "size":"13px",
                 	"font-family": 'Open Sans Condensed',
                     "font-color":"#05636c"
-                },
-                "values":fieldnames
+                }//,
+                //"values":fieldnames
             },
             /*"legend":{
                 "layout":"x6",
@@ -258,27 +314,27 @@ angular.module('observer').
                         "font-color":"#05636c"
                     },
                     {
-                        "rule":"%node-value > 0.6 && %node-value <= 0.8",
+                        "rule":"%node-value > 0.5 && %node-value <= 0.8",
                         "backgroundColor":"#9E6719",
                         "font-color":"#05636c"
                     },
                     {
-                        "rule":"%node-value > 0.4 && %node-value <= 0.6",
+                        "rule":"%node-value > 0.2 && %node-value <= 0.5",
                         "backgroundColor":"#9E8819",
                         "font-color":"#05636c"
                     },
                     {
-                        "rule":"%node-value > 0.2 && %node-value <= 0.4",
+                        "rule":"%node-value > -0.5 && %node-value <= 0.2",
                         "backgroundColor":"#137729",
                         "font-color":"#05636c"
                     },
                     {
-                        "rule":"%node-value > 0 && %node-value <= 0.2",
+                        "rule":"%node-value > -1.0 && %node-value <= -0.5",
                         "backgroundColor":"#183A68",
                         "font-color":"#05636c"
                     }
                 ]
             },
-            "series":coefs.map(function(i) { return {"values":i}; })
+            "series":coefs.map(function(i) { return {"values":i.map(function(j){return j || 0})}; })
         };
 }]);
