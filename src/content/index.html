@@ -8,6 +8,10 @@
         <script src="js/app.js"></script>
         <script src="js/controllers/main.js"></script>
         <script src="js/controllers/root.js"></script>
+        <script src="js/controllers/model.js"></script>
+        <script src="js/controllers/dataset.js"></script>
+        <script src="js/controllers/relation.js"></script>
+        <script src="js/directives/datasetSelector.js"></script>
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/style.css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
@@ -27,15 +31,15 @@
                         </div>
                         <div class="header-tabs headerContainer">
                             <div class="right">
-                                <a href="#/relations" class="tab">
+                                <a href="#/relations" class="tab" ng-class="{selected: isSelected('relations')}">
                                     <div class="tab-triangle"></div>
                                     <div>Relations</div>
                                 </a>
-                                <a href="#/models" class="tab">
+                                <a href="#/models" class="tab" ng-class="{selected: isSelected('models')}">
                                     <div class="tab-triangle"></div>
                                     <div>Language Models</div>
                                 </a>
-                                <a href="#/datasets" class="tab selected">
+                                <a href="#/datasets" class="tab" ng-class="{selected: isSelected('datasets')}">
                                     <div class="tab-triangle"></div>
                                     <div>Datasets</div>
                                 </a>

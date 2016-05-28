@@ -5,9 +5,42 @@ body {
 	overflow-x: hidden;
 }
 
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #103B4E;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #032331
+}
+
 .dark {
 	background-color:#032331;
 	color: #467488;
+}
+
+.medium-dark {
+	background-color: #103B4E;
+	color: #467488
+}
+
+.medium-light {
+	background-color: #467488;
+	color: #103B4E;
 }
 
 header {
@@ -96,7 +129,7 @@ header .header-content a.tab.selected div {
 	color: #032331;
 }
 
-header .header-content a.tab:hover {
+header .header-content a.tab:hover, header .header-content a.tab:active , header .header-content a.tab:link {
 	text-decoration: none;
 }
 
@@ -143,4 +176,113 @@ header .header-content a.tab:hover div {
 
 .clearfix {
 	float: none;
+}
+
+.dataset-selector {
+	z-index: 10;
+	text-align: center;
+	position: relative;
+	height: 90px;
+}
+
+.dataset-selector .selected {
+	padding: 10px 0px;
+	text-transform: uppercase;
+	font-size: 34px;
+	letter-spacing: 0.6em;
+	cursor: pointer;
+	border-bottom: 1px solid #103B4E;
+}
+
+.dataset-selector .selected.empty {
+
+}
+
+.dataset-selector .selected .glyphicon {
+	font-size: 0.8em;
+}
+
+.dataset-selector .datasets.visible {
+	height: 400px;
+}
+.dataset-selector .datasets {
+	position: absolute;
+	width: 756px;
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	box-shadow: 0px 2px 3px #103B4E;
+	border-radius: 0px 0px 5px 5px;
+	background-color: #467488;
+	transition: all 0.5s;
+	height: 0px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.dataset-selector .datasets .dataset {
+	cursor: pointer;
+	width: 744px;
+	margin: auto;
+	padding: 10px 0;
+	height: 120px;
+	font-size: 24px;
+	background-color: #032331;
+	color: #27566B;
+	border-bottom: 1px solid #103B4E;
+}
+
+.dataset-selector .datasets .dataset.personal {
+	background: #7197A8;
+}
+
+.dataset-selector .datasets .dataset.user-submitted {
+	color: #032331;
+	background: #506078;
+}
+
+
+.dataset-selector .datasets .dataset:hover, .dataset-selector .datasets .dataset.personal:hover, .dataset-selector .datasets .dataset.user-submitted:hover {
+	background: #467488;
+	color: #7197A8;
+}
+
+
+.dataset-selector .datasets .dataset:last-of-type {
+	border-bottom: none;
+}
+.dataset-selector .datasets .dataset .row {
+	height: 100px;
+}
+
+.dataset-selector .datasets .dataset .row .col-md-3, .dataset-selector .datasets .dataset .row .col-md-6 {
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+}
+
+.dataset-selector .datasets .dataset .row .col-md-3 span, .dataset-selector .datasets .dataset .row .col-md-6 span {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
+}
+
+.dataset-selector .datasets .dataset .description {
+	font-size: 14px;
+	overflow: auto;
+}
+
+.overlay {
+	position: fixed;
+	top: 237px;
+	width: 100%;
+	height: calc(100vh - 237px);
+	background-color: black;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.5s;
+}
+
+.overlay.visible {
+	opacity: 0.5
 }

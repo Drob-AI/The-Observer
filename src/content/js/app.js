@@ -4,14 +4,14 @@ angular.module('observer', ['ngRoute']).
             templateUrl: '/views/root.html',
             controller: 'RootController'
         }).when('/datasets', {
-            templateUrl: '/views/root.html',
-            controller: 'RootController'
+            templateUrl: '/views/dataset.html',
+            controller: 'DatasetController'
         }).when('/models', {
-            templateUrl: '/views/root.html',
-            controller: 'RootController'
-        }).when('/relation', {
-            templateUrl: '/views/root.html',
-            controller: 'RootController'
+            templateUrl: '/views/model.html',
+            controller: 'ModelController'
+        }).when('/relations', {
+            templateUrl: '/views/relation.html',
+            controller: 'RelationController'
         }).otherwise({
             redirectTo: '/'
         });
