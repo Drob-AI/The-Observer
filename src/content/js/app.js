@@ -5,7 +5,12 @@ angular.module('observer', ['ngRoute']).
             controller: 'RootController'
         }).when('/datasets', {
             templateUrl: '/views/dataset.html',
-            controller: 'DatasetController'
+            controller: 'DatasetController',
+            resolve: {
+                datasets: ['DatasetRepository', function (DatasetRepository){
+                    return DatasetRepository.all();
+                }]
+            }
         }).when('/models', {
             templateUrl: '/views/model.html',
             controller: 'ModelController'

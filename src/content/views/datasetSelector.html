@@ -1,0 +1,40 @@
+<div class="dataset-selector medium-light">
+	<div data-ng-class="{'visible': expanded}" class="overlay">
+	</div>
+	<div class="container">
+		<div data-ng-if="!selected" class="selected empty" data-ng-click="toggleMenu()">
+			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
+			SELECT A DATASET
+			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
+		</div>
+		<div data-ng-if="selected" class="selected" data-ng-click="toggleMenu()">
+			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
+			{{selected.name}}
+			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
+		</div>
+		<div class="datasets" data-ng-class="{'visible': expanded}">
+			<div class="dataset"
+				ng-show="expanded"
+				data-ng-repeat="dataset in datasets"
+				data-ng-class="{
+					'personal': dataset.personal,
+					'user-submitted': dataset.userSubmitted
+				}"
+				data-ng-click="selectDataset(dataset)">
+				<div class="row">
+					<div class="col-md-3">
+						<span>{{dataset.name}}</span>
+					</div>
+					<div class="col-md-6 description">
+						<span>{{dataset.description}}</span>
+					</div>
+					<div class="col-md-3">
+						<span data-ng-if="dataset.personal">Personal</span>
+						<span data-ng-if="dataset.userSubmitted">User</span>
+						<span data-ng-if="!dataset.userSubmitted && !dataset.personal">Public</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

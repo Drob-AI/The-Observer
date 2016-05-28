@@ -43,6 +43,20 @@ body {
 	color: #103B4E;
 }
 
+.light {
+	background-color: #7197A8;
+	color: #032331;
+}
+
+.primary {
+	background-color: #27566B;
+	color: #032331;
+}
+
+.white {
+	background-color: white;
+}
+
 header {
 	margin-top: 12px;
 	position: relative;
@@ -194,6 +208,11 @@ header .header-content a.tab:hover div {
 	border-bottom: 1px solid #103B4E;
 }
 
+.dataset-selector .selected:hover {
+	color: #032331;
+	border-bottom: 1px solid #032331;
+}
+
 .dataset-selector .selected.empty {
 
 }
@@ -213,7 +232,7 @@ header .header-content a.tab:hover div {
 	transform: translate(-50%, 0);
 	box-shadow: 0px 2px 3px #103B4E;
 	border-radius: 0px 0px 5px 5px;
-	background-color: #467488;
+	background-color: #032331;
 	transition: all 0.5s;
 	height: 0px;
 	overflow-y: scroll;
@@ -285,4 +304,42 @@ header .header-content a.tab:hover div {
 
 .overlay.visible {
 	opacity: 0.5
+}
+
+.fixed-height {
+	height: 100%;
+}
+
+.fixed-text {
+	overflow-y: hidden;
+	text-overflow: clip;
+}
+
+.scrollable {
+	overflow-y: scroll;
+}
+
+.dataset-overview {
+	height: 350px;
+	padding: 15px 0;
+}
+
+.dataset-overview table.table {
+	margin-bottom: 0;
+}
+
+.dataset-overview table.table tr td, .dataset-overview table.table tr th {
+	border-top: none;
+}
+
+.dataset-overview table.table > thead > tr > th {
+	border-bottom: none;
+}
+
+.dataset-overview table.table > tbody > tr > td {
+	border-bottom: 1px solid #032331;
+}
+
+.dataset-overview table.table tr th {
+	white-space: nowrap !important;
 }
