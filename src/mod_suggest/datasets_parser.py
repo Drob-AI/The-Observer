@@ -33,16 +33,25 @@ class DatasetParser:
 
     def _calculate_feature_stats(self, feature):
         is_float = all([isinstance(x, numbers.Number) for x in feature])
-        # print(is_float, feature)
         stats = {}
         if(is_float):
-            stats = {'type': 'number', 'min': np.amin(feature), 'max': np.amax(feature),
-                      'q1':np.percentile(feature, 25), 'q3':np.percentile(feature, 75),
-                      'median':np.median(feature), 'mean': np.mean(feature),
-                      'variance': np.var(feature), 'std': np.std(feature),
+            stats = {'type': 'number', 'min': np.nanmin(feature), 'max': np.nanmax(feature),
+                      'q1':np.nanpercentile(feature, 25), 'q3':np.nanpercentile(feature, 75),
+                      'median':np.nanmedian(feature), 'mean': np.nanmean(feature),
+                      'variance': np.nanvar(feature), 'std': np.nanstd(feature),
                       'avr': np.average(feature)}
         else:
-            stats = {'type':'string'}
+            counted = {}
+            # {'text': "golem kur", weight: 13}
+            for nominal in feature:
+                nominal
+                if nominal in counted:
+                    counted[nominal] += 1
+                else:
+                    counted[nominal] = 1
+
+            counted = [{'text':key, 'weight':counted[key]} for key in counted]
+            stats = {'type':'string', 'histogram': counted}
 
         return stats
 
@@ -71,13 +80,20 @@ class DatasetParser:
     def _clear_info(self, dataset_info):
         for field_stats in dataset_info['statstics']:
             for key in field_stats:
-                if(key != 'type' and np.isnan(field_stats[key])):
+                if(key != 'type' and isinstance(field_stats[key], numbers.Number)and np.isnan(field_stats[key])):
                     field_stats[key] = None
 
-        for field_stats in dataset_info['cov_matrix']:
-            for index, x in enumerate(field_stats):
-                if(np.isnan(x)):
-                    field_stats[index] = None
+        if(hasattr(dataset_info['cov_matrix'], '__iter__')):
+            for field_stats in dataset_info['cov_matrix']:
+                for index, x in enumerate(field_stats):
+                    if(np.isnan(x)):
+                        field_stats[index] = None
+
+        if(hasattr(dataset_info['stastic_test'], '__iter__')):
+            for index, field_stats in enumerate(dataset_info['stastic_test']):
+                    if(np.isnan(field_stats[0])):
+                        dataset_info['stastic_test'][index] = list(field_stats)
+                        dataset_info['stastic_test'][index] = None
 
         return dataset_info
 
@@ -85,19 +101,14 @@ class DatasetParser:
         del dataset_info['path']
         dataset_info['fields'] = self.file_data[0]
         del self.file_data[0]
-        dataset_info['exampleData'] = self.file_data[:5]
+        dataset_info['exampleData'] = list(self.file_data[:5])
 
-        # TODO do it!
         dataset_info['statstics'] = self._calculate_statistics()
 
-        # print(dataset_info['statstics'])
-        # for l in dataset_info['statstics']:
-        #     print(l)
-
-
         dataset_info['size'] = {'mb':sys.getsizeof(self.file_data), 'count': len(self.file_data)}
-        # TODO do it!
         dataset_info['fillCoef'] = self._calculate_fill_coef()
+
+        # TODO do it!
         dataset_info['clusterData'] = []
         dataset_info['classfierData'] = []
         dataset_info['regressionData'] = []
@@ -108,8 +119,6 @@ class DatasetParser:
 
         number_rows_stats = filter(lambda x: x['type'] == 'number', dataset_info['statstics'])
 
-        print(len(number_rows_stats), len(all_number_sets))
-        # print(number_rows_stats)
 
         result = []
         for index, column in enumerate(all_number_sets):
