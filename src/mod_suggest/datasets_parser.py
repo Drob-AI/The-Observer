@@ -6,14 +6,15 @@ import numbers
 from scipy import stats
 class DatasetParser:
     def __init__(self, file_path):
-        self.file_data = open(file_path, 'r')
+        if(file_path):
+            self.file_data = open(file_path, 'r')
 
-        lines = []
-        for line in self.file_data.readlines():
-            parsed_row =  self._parse_row(line.strip().split(','))
-            lines.append(parsed_row)
+            lines = []
+            for line in self.file_data.readlines():
+                parsed_row =  self._parse_row(line.strip().split(','))
+                lines.append(parsed_row)
 
-        self.file_data = lines
+            self.file_data = lines
 
     def _parse_row(self, row):
 
@@ -104,13 +105,13 @@ class DatasetParser:
             dataset_info['cov_matrix'] = None
 
 
-        if(hasattr(dataset_info['static_test'], '__iter__')):
-            for index, field_stats in enumerate(dataset_info['static_test']):
-                    if(np.isnan(field_stats[0])):
-                        dataset_info['static_test'][index] = list(field_stats)
-                        dataset_info['static_test'][index][0] = None
-        else:
-            dataset_info['static_test'] = None
+        # if(hasattr(dataset_info['static_test'], '__iter__')):
+        #     for index, field_stats in enumerate(dataset_info['static_test']):
+        #             if(np.isnan(field_stats[0])):
+        #                 dataset_info['static_test'][index] = list(field_stats)
+        #                 dataset_info['static_test'][index][0] = None
+        # else:
+        #     dataset_info['static_test'] = None
 
         return dataset_info
 
@@ -150,6 +151,7 @@ class DatasetParser:
 
         dataset_info['static_test'] = []
         for numberset in all_number_sets:
+            dataset_info['static_test'].append([])
             for numberset2 in all_number_sets:
-                dataset_info['static_test'].append(stats.pearsonr(numberset, numberset2))
+                dataset_info['static_test'][-1].append(stats.pearsonr(numberset, numberset2))
         return json.dumps(self._clear_info(dataset_info))

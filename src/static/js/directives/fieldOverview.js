@@ -79,7 +79,7 @@ angular.module('observer').
 
                     $timeout(function () {
                         fieldStatistics.ML.created = true;
-                    }, 1500);
+                    }, 3500);
                 }
             }]
         };

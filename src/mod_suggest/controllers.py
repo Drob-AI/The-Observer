@@ -11,6 +11,8 @@ from src.mod_suggest.models import Dataset
 from flask import request
 from flask import make_response
 
+import numpy as np
+
 @FLASK.route('/')
 def root():
     return FLASK.send_static_file('index.html')
@@ -130,6 +132,81 @@ def find_dataset_info():
 
     data_interface = parsers.DatasetParser( os.path.realpath(dataset.path))
     return data_interface.dataset_to_json(dataset.to_dict())
+
+def megre_file_datas(file_data1, file_data2, merge_config):
+    header1 = file_data1[0]
+    # del file_data1[0]
+
+    header2 = file_data2[0]
+    # del file_data2[0]
+
+    merge_index1 = merge_config[0]['index']
+    merge_index2 = merge_config[1]['index']
+
+    merged_data = []
+
+
+    merged_data.append(header1 + header2)
+    for row1 in file_data1:
+        if row1[merge_index1] == merge_config[0]['val']:
+            for row2 in file_data2:
+                if row2[merge_index2] == merge_config[1]['val']:
+                    merged_data.append(row1 + row2)
+
+    return merged_data
+
+merged_datasets_cache = {}
+@FLASK.route("/datasets/merge")
+def merge_datasets_info():
+    id1 = request.args.get('firstId')
+    id2 = request.args.get('secondId')
+
+    dataset1 = Dataset.query.get(id1)
+    dataset2 = Dataset.query.get(id2)
+
+    data_interface1 = parsers.DatasetParser( os.path.realpath(dataset1.path))
+    data_interface2 = parsers.DatasetParser( os.path.realpath(dataset2.path))
+
+    match_list = [{'index': 0, 'val':'2016-05-1'}, {'index': 0, 'val':'G238510'}]
+
+    merged_data = megre_file_datas(data_interface1.file_data, data_interface2.file_data, match_list)
+
+    key = str(id1) + str(id2) + str(match_list[0]['index']) + str(match_list[1]['index'])
+    merged_datasets_cache[key] = merged_data
+    return json.dumps(merged_data)
+
+@FLASK.route("/datasets/values")
+def datasets_values():
+    id1 = request.args.get('firstId')
+    id2 = request.args.get('secondId')
+
+    dataset1 = Dataset.query.get(id1)
+    dataset2 = Dataset.query.get(id2)
+
+    data_interface1 = parsers.DatasetParser( os.path.realpath(dataset1.path))
+    data_interface2 = parsers.DatasetParser( os.path.realpath(dataset2.path))
+
+    print(np.array(data_interface1.file_data[1:]).T)
+
+    result1 = [list(set(row)) for row in np.array(data_interface1.file_data[1:]).T]
+    result2 = [list(set(row)) for row in np.array(data_interface2.file_data[1:]).T]
+    return json.dumps({'first':result1, 'second':result2})
+
+@FLASK.route("/datasets/merged/stat")
+def stats():
+    data_interface = parsers.DatasetParser(None)
+    key = request.args.get('firstId') + request.args.get('secondId') + request.args.get('index1') + request.args.get('index2')
+
+    data_interface.file_data = merged_datasets_cache[key]
+
+    dataset = {'name': "Merged Set",
+            'description': "Merged Set",
+            'source': "Merget Set",
+            'date': 'Today',
+            'path' : 'None',
+            'personal': True,
+            'userSubmitted': False}
+    return data_interface.dataset_to_json(dataset)
 
 @FLASK.route("/datasets/all")
 def find_datasets_info():

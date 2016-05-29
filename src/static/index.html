@@ -67,6 +67,17 @@
                 </div>
             </header>
             <div ng-view></div>
+
+            <div class="loginform cf container" style="text-align:center; vertical-align:middle">
+                <label for="usermail">Email</label><br/>
+                    <input type="email" name="usermail" placeholder="yourname@email.com" required></input>
+                    <br/>
+                    <label for="password">Password</label><br/>
+                    <input type="password" name="password" placeholder="password" required></input>
+                    <br/>
+                    <a href="#/datasets" id="loginbutton"><button>Login</button></a>
+            </div>
+
             <footer class="container-fluid"></footer>
         </div>
     </body>
