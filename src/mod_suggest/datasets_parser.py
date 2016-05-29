@@ -30,8 +30,8 @@ class DatasetParser:
             empty_data = filter(lambda field: not field, row)
             not_filled = not_filled + len(empty_data)
             all = all + len(row)
-
-        return float(not_filled) / float(all)
+        return 0;
+        # return float(not_filled) / float(all)
 
     def _calculate_feature_stats(self, feature):
         is_float = all([isinstance(x, numbers.Number) for x in feature])

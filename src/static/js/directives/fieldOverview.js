@@ -7,12 +7,12 @@ angular.module('observer').
                 statistics: '=',
                 selectedFields: '=',
                 staticTest: '=',
-                id: '='
+                id: '=',
+                merged: '='
             },
             replace: true,
             templateUrl: 'views/fieldOverview.html',
             controller: ['$scope', function ($scope) {
-                console.log($scope.staticTest);
                 $scope.colors = [
                     '#7197A8',
                     '#506078',

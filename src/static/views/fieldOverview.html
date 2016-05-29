@@ -53,11 +53,14 @@
                     </div>
                     <div class="row" style="margin-top: 8px">
                         <div class="col-md-12">
-                            <a style=" border-radius: 0;" data-ng-if="!statistics[selectedFields.firstField].ML.created" data-ng-click="createML()" type="button" class="btn btn-info btn-block">Create {{statistics[selectedFields.firstField].ML.type}}</a>
-                            <div style="text-align: center;" data-ng-if="statistics[selectedFields.firstField].ML.created">
+                            <a style=" border-radius: 0;" data-ng-if="!statistics[selectedFields.firstField].ML.created && !merged" data-ng-click="createML()" type="button" class="btn btn-info btn-block">Create {{statistics[selectedFields.firstField].ML.type}}</a>
+                            <div style="text-align: center;" data-ng-if="statistics[selectedFields.firstField].ML.created && !merged">
                                 <a target="_blank" ng-href="/classifier/download?gid={{id}}" type="button" style="border-radius: 0;" class="btn btn-success btn-block">Buy {{statistics[selectedFields.firstField].ML.type}} with {{statistics[selectedFields.firstField].ML.precission}} {{statistics[selectedFields.firstField].ML.metric}}</a>
                             </div>
-                            <a target="_blank" href="/download?gid={{id}}" type="button" style="margin-top: 8px; border-radius: 0" class="btn btn-success btn-block">Buy Dataset</a>
+
+                            <a target="_blank" data-ng-if="!merged" ng-href="/download?gid={{id}}" type="button" style="margin-top: 8px; border-radius: 0" class="btn btn-success btn-block">Buy Dataset</a>
+
+                            <a target="_blank" data-ng-if="merged" ng-href="/datasets/merge/download?gid={{id}}" type="button" style="margin-top: 8px; border-radius: 0" class="btn btn-success btn-block">Buy Dataset</a>
                         </div>
                     </div>
                 </div>

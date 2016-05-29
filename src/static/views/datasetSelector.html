@@ -20,7 +20,7 @@
 			</div>
 			<div class="dataset"
 				ng-show="expanded"
-				data-ng-repeat="dataset in datasets | filter:datasetFilter"
+				data-ng-repeat="dataset in datasets | filter:datasetFilter track by $index"
 				data-ng-class="{
 					'personal': dataset.personal,
 					'user-submitted': dataset.userSubmitted

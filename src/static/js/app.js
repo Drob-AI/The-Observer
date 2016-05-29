@@ -11,6 +11,14 @@ angular.module('observer', ['ngRoute', 'angular-jqcloud', 'ngResource', 'zingcha
                     return DatasetRepository.all();
                 }]
             }
+        }).when('/dataset/merged', {
+            templateUrl: '/views/mergedOverview.html',
+            controller: 'MergedOverviewController',
+            resolve: {
+                datasets: ['DatasetRepository', function (DatasetRepository){
+                    return DatasetRepository.merged();
+                }]
+            }
         }).when('/models', {
             templateUrl: '/views/model.html',
             controller: 'ModelController'

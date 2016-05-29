@@ -155,7 +155,9 @@ def megre_file_datas(file_data1, file_data2, merge_config):
 
     return merged_data
 
+
 merged_datasets_cache = {}
+
 @FLASK.route("/datasets/merge")
 def merge_datasets_info():
     id1 = request.args.get('firstId')
@@ -173,7 +175,35 @@ def merge_datasets_info():
 
     key = str(id1) + str(id2) + str(match_list[0]['index']) + str(match_list[1]['index'])
     merged_datasets_cache[key] = merged_data
+
     return json.dumps(merged_data)
+
+@FLASK.route("/datasets/merge/download")
+def download_datasets_info():
+
+    csv_data = merged_datasets_cache[request.args.get('gid')]
+    csv = ""
+    for row in csv_data:
+        row.append('\n')
+        print(row)
+        csv += ','.join([str(field) for field in row])
+
+    print(csv)
+    response = make_response(csv)
+    # This is the key: Set the right header for the response
+    # to be downloaded, instead of just printed on the browser
+    dataset = {
+            'name': "Merged Set.csv",
+            'description': "Merged Set",
+            'source': "Merget Set",
+            'date': 'Today',
+            'path' : 'None',
+            'personal': True,
+            'userSubmitted': False}
+
+    response.headers["Content-Disposition"] = "attachment; filename=" + dataset['name']
+    return response
+
 
 @FLASK.route("/datasets/values")
 def datasets_values():
@@ -186,8 +216,6 @@ def datasets_values():
     data_interface1 = parsers.DatasetParser( os.path.realpath(dataset1.path))
     data_interface2 = parsers.DatasetParser( os.path.realpath(dataset2.path))
 
-    print(np.array(data_interface1.file_data[1:]).T)
-
     result1 = [list(set(row)) for row in np.array(data_interface1.file_data[1:]).T]
     result2 = [list(set(row)) for row in np.array(data_interface2.file_data[1:]).T]
     return json.dumps({'first':result1, 'second':result2})
@@ -197,9 +225,11 @@ def stats():
     data_interface = parsers.DatasetParser(None)
     key = request.args.get('firstId') + request.args.get('secondId') + request.args.get('index1') + request.args.get('index2')
 
-    data_interface.file_data = merged_datasets_cache[key]
+    data_interface.file_data = list(merged_datasets_cache[key])
 
-    dataset = {'name': "Merged Set",
+    dataset = {
+            'id':key,
+            'name': "Merged Set.csv",
             'description': "Merged Set",
             'source': "Merget Set",
             'date': 'Today',
