@@ -6,14 +6,15 @@ import numbers
 from scipy import stats
 class DatasetParser:
     def __init__(self, file_path):
-        self.file_data = open(file_path, 'r')
+        if(file_path):
+            self.file_data = open(file_path, 'r')
 
-        lines = []
-        for line in self.file_data.readlines():
-            parsed_row =  self._parse_row(line.strip().split(','))
-            lines.append(parsed_row)
+            lines = []
+            for line in self.file_data.readlines():
+                parsed_row =  self._parse_row(line.strip().split(','))
+                lines.append(parsed_row)
 
-        self.file_data = lines
+            self.file_data = lines
 
     def _parse_row(self, row):
 
