@@ -154,8 +154,14 @@ def megre_file_datas(file_data1, file_data2, value_1, value_2, mappings):
     merged_data = []
 
     merged_data.append(header1 + header2)
-    i = 0
+
+    i = 0;
     for index, row1 in enumerate(file_data1[1:]):
+        if( i > 50):
+            break
+
+        print(i)
+        i+=1
 
         if row1[value_1] in values1:
             for row2 in file_data2:

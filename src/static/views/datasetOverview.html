@@ -7,7 +7,7 @@
                     <div data-ng-if="dataset.cov_matrix" data-heatmap data-dataset="dataset"></div>
                 </div>
                 <div class="col-md-6">
-                    <div data-radar data-fields="dataset.fields" data-statistics="dataset.statstics"></div>
+                    <div data-radar data-fields="dataset.fields" data-statistics="dataset.statstics" ng-if="!merged"></div>
                 </div>
             </div>
         </div>
