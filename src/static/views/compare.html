@@ -5,7 +5,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <select data-ng-model="primaryKey" class="form-control">
-                            <option data-ng-repeat="field in mainDataset.fields | filter:isMainString" value="{{$index}}">{{field}}</option>
+                            <option data-ng-repeat="field in mainDataset.fields | filter:isMainString" value="{{mainFieldIndex(field)}}">{{field}}</option>
                         </select>
                     </div>
                 </div>
@@ -15,7 +15,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <select data-ng-model="remoteKey" class="form-control">
-                            <option data-ng-repeat="field in auxDataset.fields | filter:isAuxString" value="{{$index}}">{{field}}</option>
+                            <option data-ng-repeat="field in auxDataset.fields | filter:isAuxString" value="{{auxFieldIndex(field)}}">{{field}}</option>
                         </select>
                     </div>
                 </div>
@@ -28,14 +28,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div data-ng-if="showStepTwo()">
-                        <div data-ng-repeat="key in mainDataset.values[primaryKey]" class="form-group">
+                        <div data-ng-repeat="key in mainValues[primaryKey]" class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
                                     <label for="value_{{$index}}">{{key}}</label>
                                 </div>
                                 <div class="col-md-10">
                                     <select id="value_{{$index}}" data-ng-model="bindings[$index]" class="form-control">
-                                        <option data-ng-repeat="value in auxDataset.values[remoteKey]" value="{{$index}}">{{value}}</option>
+                                        <option selected value="{{null}}"></option>
+                                        <option data-ng-repeat="value in auxValues[remoteKey]" value="{{$index}}">{{value}}</option>
                                     </select>
                                 </div>
                             </div>
