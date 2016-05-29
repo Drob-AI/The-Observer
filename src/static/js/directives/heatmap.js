@@ -18,13 +18,13 @@ angular.module('observer').
                             "y":"15px",
                             "x":"-10px",
                             "text":"Correlation coefficients",
-                            "background-color":"none",
+                            "background-color":"#467488",
                             "font-family": 'Open Sans Condensed',
-                            "font-color":"#05636c",
+                            "font-color":"#ffffff",
                             "font-size":"24px",
                             "height":"25px"
                         },
-                        "backgroundColor":"#fff",
+                        "backgroundColor":"#467488",
                         "plotarea":{
                             "margin":"100 60 90 60"
                         },
@@ -36,7 +36,7 @@ angular.module('observer').
                                 "border-color":"none",
                                 "size":"13px",
                                 "font-family": 'Open Sans Condensed',
-                                "font-color":"#05636c"
+                                "font-color":"#ffffff"
                             },
                             "guide":{
                                 "visible":false
@@ -60,7 +60,7 @@ angular.module('observer').
                                 "border-color":"none",
                                 "size":"13px",
                                 "font-family": 'Open Sans Condensed',
-                                "font-color":"#05636c"
+                                "font-color":"#ffffff"
                             }//,
                             //"values":fieldnames
                         },
@@ -106,27 +106,27 @@ angular.module('observer').
                                 {
                                     "rule":"%node-value > 0.8",
                                     "backgroundColor":"#9E2619",
-                                    "font-color":"#05636c"
+                                    "font-color":"#ffffff"
                                 },
                                 {
                                     "rule":"%node-value > 0.5 && %node-value <= 0.8",
                                     "backgroundColor":"#9E6719",
-                                    "font-color":"#05636c"
+                                    "font-color":"#ffffff"
                                 },
                                 {
                                     "rule":"%node-value > 0.2 && %node-value <= 0.5",
                                     "backgroundColor":"#9E8819",
-                                    "font-color":"#05636c"
+                                    "font-color":"#ffffff"
                                 },
                                 {
                                     "rule":"%node-value > -0.5 && %node-value <= 0.2",
                                     "backgroundColor":"#137729",
-                                    "font-color":"#05636c"
+                                    "font-color":"#ffffff"
                                 },
                                 {
                                     "rule":"%node-value > -1.0 && %node-value <= -0.5",
                                     "backgroundColor":"#183A68",
-                                    "font-color":"#05636c"
+                                    "font-color":"#ffffff"
                                 }
                             ]
                         },
