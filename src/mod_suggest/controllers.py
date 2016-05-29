@@ -11,6 +11,8 @@ from src.mod_suggest.models import Dataset
 from flask import request
 from flask import make_response
 
+import numpy as np
+
 @FLASK.route('/')
 def root():
     return FLASK.send_static_file('index.html')
@@ -144,7 +146,6 @@ def megre_file_datas(file_data1, file_data2, merge_config):
     merged_data = []
 
 
-    print(header1, header2)
     merged_data.append(header1 + header2)
     for row1 in file_data1:
         if row1[merge_index1] == merge_config[0]['val']:
@@ -171,10 +172,24 @@ def merge_datasets_info():
     merged_data = megre_file_datas(data_interface1.file_data, data_interface2.file_data, match_list)
 
     key = str(id1) + str(id2) + str(match_list[0]['index']) + str(match_list[1]['index'])
-    print(key)
     merged_datasets_cache[key] = merged_data
     return json.dumps(merged_data)
 
+@FLASK.route("/datasets/values")
+def datasets_values():
+    id1 = request.args.get('firstId')
+    id2 = request.args.get('secondId')
+
+    dataset1 = Dataset.query.get(id1)
+    dataset2 = Dataset.query.get(id2)
+
+    data_interface1 = parsers.DatasetParser( os.path.realpath(dataset1.path))
+    data_interface2 = parsers.DatasetParser( os.path.realpath(dataset2.path))
+
+    print(np.array(data_interface1.file_data[1:]).T)
+
+    result = [list(set(row)) for row in np.array(data_interface1.file_data[1:]).T]
+    return json.dumps(result)
 
 @FLASK.route("/datasets/merged/stat")
 def stats():
