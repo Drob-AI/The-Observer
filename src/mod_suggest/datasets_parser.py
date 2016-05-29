@@ -35,7 +35,6 @@ class DatasetParser:
     def _calculate_feature_stats(self, feature):
         is_float = all([isinstance(x, numbers.Number) for x in feature])
         stats = {}
-        # print(feature, is_float)
         if(is_float):
             stats = {'type': 'number', 'min': np.nanmin(feature), 'max': np.nanmax(feature),
                       'q1':np.nanpercentile(feature, 25), 'q3':np.nanpercentile(feature, 75),
@@ -58,11 +57,8 @@ class DatasetParser:
 
     def _calculate_statistics(self):
         result = []
-        print(self.file_data)
         transposed = np.array(self.file_data).T
-        print(transposed)
 
-        print(len(transposed[0]))
         for field in transposed:
             field = self._parse_row(field)
             result.append(self._calculate_feature_stats(field))
@@ -70,29 +66,28 @@ class DatasetParser:
         return result
 
 
+    # def _is_float(self, field):
+    #     if(not(not field) and field[0] == '-'):
+    #         field = field[1:]
+
+    #     # TODO please forgive me!
+    #     field = str.replace(field , 'e-', '')
+    #     field = str.replace(field , 'E-', '')
+    #     partition = field.partition('.')
+
+    #     return (partition[0].isdigit() and partition[1]=='.'
+    #         and partition[2].isdigit() or (partition[0]==''
+    #         and partition[1]=='.' and partition[2].isdigit())
+    #         or (partition[0].isdigit()
+    #         and partition[1]=='.'
+    #         and partition[2]==''))
+
     def _is_float(self, field):
-        if(not(not field) and field[0] == '-'):
-            field = field[1:]
-
-        # TODO please forgive me!
-        field = str.replace(field , 'e-', '')
-        field = str.replace(field , 'E-', '')
-        partition = field.partition('.')
-
-        if(not ((partition[0].isdigit() and partition[1]=='.'
-            and partition[2].isdigit() or (partition[0]==''
-            and partition[1]=='.' and partition[2].isdigit())
-            or (partition[0].isdigit()
-            and partition[1]=='.'
-            and partition[2]=='')))):
-            print(partition)
-
-        return (partition[0].isdigit() and partition[1]=='.'
-            and partition[2].isdigit() or (partition[0]==''
-            and partition[1]=='.' and partition[2].isdigit())
-            or (partition[0].isdigit()
-            and partition[1]=='.'
-            and partition[2]==''))
+        try:
+          float(field)
+          return True
+        except Exception:
+            return False
 
     def _clear_info(self, dataset_info):
         for field_stats in dataset_info['statstics']:
@@ -105,12 +100,17 @@ class DatasetParser:
                 for index, x in enumerate(field_stats):
                     if(np.isnan(x)):
                         field_stats[index] = None
+        else:
+            dataset_info['cov_matrix'] = None
+
 
         if(hasattr(dataset_info['stastic_test'], '__iter__')):
             for index, field_stats in enumerate(dataset_info['stastic_test']):
                     if(np.isnan(field_stats[0])):
                         dataset_info['stastic_test'][index] = list(field_stats)
                         dataset_info['stastic_test'][index] = None
+        else:
+            dataset_info['stastic_test'] = None
 
         return dataset_info
 
@@ -131,7 +131,7 @@ class DatasetParser:
         dataset_info['regressionData'] = []
 
         transposed = [self._parse_row(field) for field in np.array(self.file_data).T]
-
+        print(transposed)
         all_number_sets = filter(lambda feature: all([isinstance(x, numbers.Number) for x in feature]), transposed)
 
         number_rows_stats = filter(lambda x: x['type'] == 'number', dataset_info['statstics'])
