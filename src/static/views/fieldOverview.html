@@ -31,6 +31,9 @@
                 <div class="col-md-8 fixed-height dark" data-ng-if="isString(selectedFields.firstField)">
                     <jqcloud words="statistics[selectedFields.firstField].histogram" colors="{{colors}}" width="600" height="220" steps="4" font-size="{from:0.06, to:0.03}" center='{x: 0.5, y:0.5}' shape='elliptic'></jqcloud>
                 </div>
+                <div class="col-md-8 fixed-height dark" data-ng-if="isNumber(selectedFields.firstField)">
+                    <div data-boxplot data-statistic="statistics[selectedFields.firstField]" data-field-name="fields[selectedFields.firstField]"></div>
+                </div>
             </div>
         </div>
         <div class="col-md-12" data-ng-if="isFieldComparison()">
