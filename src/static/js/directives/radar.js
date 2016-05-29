@@ -18,6 +18,11 @@ angular.module('observer').
                         });
                     radarDataBand = $scope.fields;
 
+                    radarMaxValue = Math.max.apply(null, radarValues);
+                    radarDelta = radarMaxValue / 5;
+
+                    console.log(radarMaxValue, radarDelta)
+
                     $scope.radarJson = {
                     "globals": {
                         "font-family":'Open Sans Condensed',
@@ -34,16 +39,19 @@ angular.module('observer').
                         }
                         },
                         "title" : {
+                            "y":"15px",
+                            "x":"-10px",
                         "text" : "Standard Deviation of attributes",
-                        "background-color":"#333",
-                        "font-size":"24px"
+                        "font-color":"#05636c",
+                        "font-size":"24px",
+                            "height":"25px"
                         },
                         "scale-k":{
                         "aspect":"circle",
                         "visible":false
                     },
                     "scale-v":{
-                        "values":"0:25:5",
+                        "values":"0:"+radarMaxValue+":"+radarDelta+"",
                         "guide": {
                         "line-width":1,
                         "line-style":"solid",
@@ -67,7 +75,7 @@ angular.module('observer').
                                 //"tooltip-text" : "%v studio albums made by %data-band",
                                 "url" : "http://www.google.com/#q=%data-band",
                                 "target" : "_blank",
-                                "background-color":"#0CF"
+                                "background-color":"#7197A8"
                             }
                         ]
                     };
