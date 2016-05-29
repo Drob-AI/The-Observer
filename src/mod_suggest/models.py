@@ -39,5 +39,5 @@ class Dataset(Base):
                     personal=self.personal,
                     userSubmitted=self.userSubmitted)
 
-# DB.drop_all()
+#DB.drop_all()
 DB.create_all()

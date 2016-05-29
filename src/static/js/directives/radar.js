@@ -21,8 +21,6 @@ angular.module('observer').
                     radarMaxValue = Math.max.apply(null, radarValues);
                     radarDelta = radarMaxValue / 5;
 
-                    console.log(radarMaxValue, radarDelta)
-
                     $scope.radarJson = {
                     "globals": {
                         "font-family":'Open Sans Condensed',

@@ -3,6 +3,7 @@ body {
 	font-family: 'Open Sans Condensed', sans-serif;
 	max-width: 100%;
 	overflow-x: hidden;
+	font-size: 18px;
 }
 
 /* Let's get this party started */
@@ -364,6 +365,7 @@ header .header-content a.tab:hover div {
 
 .dataset-overview table.table {
 	margin-bottom: 0;
+	font-size: 1.1em;
 }
 
 .dataset-overview table.table tr td, .dataset-overview table.table tr th {
@@ -439,6 +441,7 @@ body > div > div > div.medium-dark.padded.ng-scope > div.field-selector.containe
 
 .field-overview {
 	height: 280px;
+	font-size: 1.2em !important;
 }
 
 .padded {
