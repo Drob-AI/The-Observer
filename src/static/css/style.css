@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Open Sans Condensed';
+  src: url('../fonts/OpenSans-CondLight.ttf')  format('truetype');
+}
+
 body {
 	background-color: #27566B;
 	font-family: 'Open Sans Condensed', sans-serif;
