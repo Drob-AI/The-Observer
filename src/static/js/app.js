@@ -1,4 +1,4 @@
-angular.module('observer', ['ngRoute', 'angular-jqcloud', 'ngResource']).
+angular.module('observer', ['ngRoute', 'angular-jqcloud', 'ngResource', 'zingchart-angularjs']).
     config(function ($routeProvider) {
         $routeProvider.when('/', {
             templateUrl: '/views/root.html',

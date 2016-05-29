@@ -2,13 +2,7 @@ angular.module('observer').
     controller('DatasetController', ['$scope', 'datasets', function ($scope, datasets) {
         $scope.dataset = null;
         $scope.datasets = datasets;
-        console.log(datasets);
-        $scope.selectedFields = {
-            firstField: null,
-            secondField: null
-        }
-
-                $scope.showBoxPlot = false;
+        $scope.showBoxPlot = false;
         var selectedFeature = 2;
 
         $scope.words = [
@@ -42,11 +36,11 @@ angular.module('observer').
 	      {text: "ut ultrices", weight: 2}
     	];
 
-    	$scope.boxPlotSettings =
-		    {
+    	$scope.boxPlotSettings = 
+		    {  
 			   "type":"boxplot",
 			   "background-color":"#DCE6F1",
-			   "title":{
+			   "title":{  
 			      "background-color":"none",
 			      "text":"Base Salary Comparison",
 			      "color":"black",
@@ -54,12 +48,12 @@ angular.module('observer').
 			      "font-size":24,
 			      "offset-y":"36%"
 			   },
-			   "plotarea":{
+			   "plotarea":{  
 			      "margin-top":"20%",
 			      "margin-left":"25%",
 			      "margin-right":"25%"
 			   },
-			   "plot":{
+			   "plot":{  
 			      "bar-width":70
 			   },
 	           "scaleX":{
@@ -71,7 +65,7 @@ angular.module('observer').
 		                "line-width":0,
 		                "items":[
 		                    {
-		                      "background-color":"#ebebeb"
+		                      "background-color":"#ebebeb"	                        
 		                    },
 		                    {
 		                      "background-color":"#fbfbfb"
@@ -85,19 +79,19 @@ angular.module('observer').
 		            "items-overlap":true,
 		            "values":[datasets[8].fields[selectedFeature]]
 	        	},
-			   "scale-y":{
+			   "scale-y":{  
 			      "offset-start":20,
 			      "offset-end":20,
 			      "format":"%v",
 			      "line-color":"#7F7F7F",
-			      "tick":{
+			      "tick":{  
 			         "line-color":"#7F7F7F"
 			      },
-			      "guide":{
+			      "guide":{  
 			         "visible":false
 			      }
 			   },
-			   "options":{
+			   "options":{  
 			        "box":{
 	                "border-color":"#204A7B",
 	                "border-width":2,
@@ -111,31 +105,31 @@ angular.module('observer').
 	                    "text":"<span style=\"font-style:italic;\">%scale-key-text</span><br><b style=\"font-size:15px;\"align:left;>Observations:</b><br><br>Maximum: <b>%data-max</b><br>Upper Quartile: <b>%data-upper-quartile</b><br>Median: <b>%data-median</b><br>Lower Quartile: <b>%data-lower-quartile</b><br>Minimum: <b>%data-min</b>"
 	                }
 	            },
-			      "line-median-level":{
+			      "line-median-level":{  
 			         "line-color":"#FC0B1A",
 			         "line-width":2
 			      },
-			      "line-min-level":{
+			      "line-min-level":{  
 			         "line-color":"#204A7B",
 			         "line-width":2
 			      },
-			      "line-min-connector":{
+			      "line-min-connector":{  
 			         "line-color":"#204A7B",
 			         "line-width":2
 			      },
-			      "line-max-level":{
+			      "line-max-level":{  
 			         "line-color":"#204A7B",
 			         "line-width":2
 			      },
-			      "line-max-connector":{
+			      "line-max-connector":{  
 			         "line-color":"#204A7B",
 			         "line-width":2
 			      }
 			   },
-			   "series":[
-			      {
-			        "data-box":[
-			            [
+			   "series":[  
+			      {  
+			        "data-box":[  
+			            [  
 			            	datasets[8].statstics[selectedFeature].max,
 			            	datasets[8].statstics[selectedFeature].q3,
 			            	datasets[8].statstics[selectedFeature].median,
@@ -343,4 +337,4 @@ angular.module('observer').
             },
             "series":coefs.map(function(i) { return {"values":i.map(function(j){return j || 0})}; })
         };
-    }]);
+}]);
