@@ -16,7 +16,12 @@ angular.module('observer', ['ngRoute', 'angular-jqcloud', 'ngResource', 'zingcha
             controller: 'ModelController'
         }).when('/relations', {
             templateUrl: '/views/relation.html',
-            controller: 'RelationController'
+            controller: 'RelationController',
+            resolve: {
+                datasets: ['DatasetRepository', function (DatasetRepository){
+                    return DatasetRepository.all();
+                }]
+            }
         }).otherwise({
             redirectTo: '/'
         });

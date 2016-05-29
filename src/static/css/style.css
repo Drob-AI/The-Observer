@@ -465,3 +465,21 @@ div.jqcloud span.w4, div.jqcloud span.w3, div.jqcloud span.w2, div.jqcloud span.
 .datachart .col-md-6 {
 	padding: 0;
 }
+
+.relations .container-fluid {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.relations .dataset-selector.empty {
+	height: 90px;
+	margin-top: 0px;
+	padding: 0;
+    box-shadow: none;
+}
+
+.relations .container-fluid .container {
+	width: 100%
+	margin: inherit 0;
+}
