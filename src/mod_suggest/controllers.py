@@ -188,8 +188,9 @@ def datasets_values():
 
     print(np.array(data_interface1.file_data[1:]).T)
 
-    result = [list(set(row)) for row in np.array(data_interface1.file_data[1:]).T]
-    return json.dumps(result)
+    result1 = [list(set(row)) for row in np.array(data_interface1.file_data[1:]).T]
+    result2 = [list(set(row)) for row in np.array(data_interface2.file_data[1:]).T]
+    return json.dumps({'first':result1, 'second':result2})
 
 @FLASK.route("/datasets/merged/stat")
 def stats():
