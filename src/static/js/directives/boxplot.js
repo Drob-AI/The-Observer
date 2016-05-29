@@ -34,9 +34,10 @@ angular.module('observer').
                         "type":"hboxplot",
                         "background-color":"#032331",
                         "plotarea":{
-                            "margin-top":"20%",
+                            "margin": "10% 10% 10% 10%"
+                            /*"margin-top":"20%",
                             "margin-left":"25%",
-                            "margin-right":"25%"
+                            "margin-right":"25%"*/
                         },
                         "plot":{
                             "bar-width":70
