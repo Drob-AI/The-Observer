@@ -1,0 +1,58 @@
+<div>
+    <form class="light compare">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select data-ng-model="primaryKey" class="form-control">
+                            <option data-ng-repeat="field in mainDataset.fields | filter:isMainString" value="{{$index}}">{{field}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select data-ng-model="remoteKey" class="form-control">
+                            <option data-ng-repeat="field in auxDataset.fields | filter:isAuxString" value="{{$index}}">{{field}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form class="medium-dark compare padded">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div data-ng-if="showStepTwo()">
+                        <div data-ng-repeat="key in mainDataset.values[primaryKey]" class="form-group">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="value_{{$index}}">{{key}}</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <select id="value_{{$index}}" data-ng-model="bindings[$index]" class="form-control">
+                                        <option data-ng-repeat="value in auxDataset.values[remoteKey]" value="{{$index}}">{{value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row padded dark">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <h1 style="margin-top: 60px">Match attribute values for your primary dataset, to
+                            values of your secoundary dataset.</h1>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
