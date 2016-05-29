@@ -15,8 +15,8 @@ angular.module('observer', ['ngRoute', 'angular-jqcloud', 'ngResource', 'zingcha
             templateUrl: '/views/mergedOverview.html',
             controller: 'MergedOverviewController',
             resolve: {
-                datasets: ['DatasetRepository', function (DatasetRepository){
-                    return DatasetRepository.merged();
+                datasets: ['DatasetRepository', '$location', function (DatasetRepository, $location){
+                    return DatasetRepository.merged($location.search().key);
                 }]
             }
         }).when('/models', {

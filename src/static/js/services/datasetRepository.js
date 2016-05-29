@@ -16,10 +16,10 @@ angular.module('observer').
             });
         }
 
-        function merged() {
+        function merged(key) {
             return $http({
                 method: 'GET',
-                url: 'http://localhost:5000/datasets/merged/stat?firstId=1&secondId=2&index1=0&index2=0'
+                url: 'http://localhost:5000/datasets/merged/stat?key='+ key
             }).then(function (mergedDatasets) {
                 return [mergedDatasets.data];
             });

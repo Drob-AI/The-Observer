@@ -2,6 +2,7 @@ angular.module('observer').
     controller('MergedOverviewController', ['$scope', 'datasets', function ($scope, datasets) {
         $scope.dataset = datasets[0]
         $scope.datasets = datasets;
+        console.log(datasets)
         _.each(datasets, function (dataset) {
             dataset.regressionData = [];
             _.each(dataset.statstics, function (statistics, idx) {

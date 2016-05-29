@@ -1,5 +1,5 @@
 angular.module('observer').
-    directive('compare', ['$http', function ($http) {
+    directive('compare', ['$http', '$location', function ($http, $location) {
         return {
             restrict: 'A',
             scope: {
@@ -47,9 +47,7 @@ angular.module('observer').
                             return null
                         }
                         if (value.length < 40) {
-                            return _.sortBy(value, function (a) {
-                                return a;
-                            });
+                            return value;
                         }
                         return null;
                     });
@@ -74,7 +72,7 @@ angular.module('observer').
                 $scope.$watch('mainDataset', function () {
                     $scope.primaryKey = null;
                     $scope.remoteKey = null;
-                    $scope.bindings = [];
+                    $scope.bindings = {};
                     $scope.mainValues = [[]];
                     $scope.auxValues = [[]];
 
@@ -86,7 +84,7 @@ angular.module('observer').
                 $scope.$watch('auxDataset', function () {
                     $scope.primaryKey = null;
                     $scope.remoteKey = null;
-                    $scope.bindings = [];
+                    $scope.bindings = {};
                     $scope.mainValues = [[]];
                     $scope.auxValues = [[]];
 
@@ -96,12 +94,25 @@ angular.module('observer').
                 })
 
                 $scope.$watch('mainValues', function () {
-                    $scope.bindings = [];
+                    $scope.bindings = {};
                 })
 
                 $scope.$watch('auxValues', function () {
-                    $scope.bindings = [];
-                })
+                    $scope.bindings = {};
+                });
+
+                $scope.submitData = function () {
+                    $http.post('http://localhost:5000/datasets/merge',
+                        {
+                            mainSetId: $scope.mainDataset.id,
+                            auxSetId: $scope.auxDataset.id,
+                            mainId: $scope.primaryKey,
+                            auxId: $scope.remoteKey,
+                            mappings: $scope.bindings
+                        }).then(function(keyObj){
+                            $location.search({key: keyObj.data}).path('/dataset/merged')
+                        });
+                };
 
                 // var values = [
                 //     ['Eins', 'Zwei', 'Drei', 'Vier']
@@ -126,7 +137,7 @@ angular.module('observer').
                         $scope.remoteKey !== null;
                 }
 
-                $scope.bindings = [];
+                $scope.bindings = {};
             }]
         };
     }]);

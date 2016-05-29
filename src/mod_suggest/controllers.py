@@ -12,6 +12,7 @@ from flask import request
 from flask import make_response
 
 import numpy as np
+import urllib
 
 @FLASK.route('/')
 def root():
@@ -133,24 +134,30 @@ def find_dataset_info():
     data_interface = parsers.DatasetParser( os.path.realpath(dataset.path))
     return data_interface.dataset_to_json(dataset.to_dict())
 
-def megre_file_datas(file_data1, file_data2, merge_config):
+def megre_file_datas(file_data1, file_data2, value_1, value_2, mappings):
     header1 = file_data1[0]
     # del file_data1[0]
 
     header2 = file_data2[0]
     # del file_data2[0]
 
-    merge_index1 = merge_config[0]['index']
-    merge_index2 = merge_config[1]['index']
+    result1 = [list(set(row[1:])) for row in np.array(file_data1).T]
+    result2 = [list(set(row[1:])) for row in np.array(file_data2).T]
+
+    values1 = []
+    values2 = []
+    for key in mappings:
+        key_2 = int(mappings[key])
+        values1.append(result1[value_1][int(key)])
+        values2.append(result2[value_2][key_2])
 
     merged_data = []
 
-
     merged_data.append(header1 + header2)
-    for row1 in file_data1:
-        if row1[merge_index1] == merge_config[0]['val']:
+    for index, row1 in enumerate(file_data1[1:]):
+        if row1[value_1] in values1:
             for row2 in file_data2:
-                if row2[merge_index2] == merge_config[1]['val']:
+                if row2[value_2] in values2:
                     merged_data.append(row1 + row2)
 
     return merged_data
@@ -158,25 +165,38 @@ def megre_file_datas(file_data1, file_data2, merge_config):
 
 merged_datasets_cache = {}
 
-@FLASK.route("/datasets/merge")
+@FLASK.route("/datasets/merge", methods=["POST"])
 def merge_datasets_info():
-    id1 = request.args.get('firstId')
-    id2 = request.args.get('secondId')
+    json_data = request.get_json(True)
+
+    id1 = int(json_data['mainSetId'])
+    id2 = int(json_data['auxSetId'])
+
+    value_1 = int(json_data['mainId'])
+    value_2 = int(json_data['auxId'])
+    mappings = json_data['mappings']
 
     dataset1 = Dataset.query.get(id1)
     dataset2 = Dataset.query.get(id2)
 
+
     data_interface1 = parsers.DatasetParser( os.path.realpath(dataset1.path))
     data_interface2 = parsers.DatasetParser( os.path.realpath(dataset2.path))
 
-    match_list = [{'index': 0, 'val':'2016-05-1'}, {'index': 0, 'val':'G238510'}]
 
-    merged_data = megre_file_datas(data_interface1.file_data, data_interface2.file_data, match_list)
+    merged_data = megre_file_datas(data_interface1.file_data, data_interface2.file_data,
+                                    value_1,
+                                    value_2,
+                                    mappings)
 
-    key = str(id1) + str(id2) + str(match_list[0]['index']) + str(match_list[1]['index'])
+    key = str(id1) + str(id2) + str(value_1) + str(value_2)
+    for k in mappings:
+        key += k
+        key += mappings[k]
+
     merged_datasets_cache[key] = merged_data
 
-    return json.dumps(merged_data)
+    return key
 
 @FLASK.route("/datasets/merge/download")
 def download_datasets_info():
@@ -185,10 +205,8 @@ def download_datasets_info():
     csv = ""
     for row in csv_data:
         row.append('\n')
-        print(row)
         csv += ','.join([str(field) for field in row])
 
-    print(csv)
     response = make_response(csv)
     # This is the key: Set the right header for the response
     # to be downloaded, instead of just printed on the browser
@@ -223,10 +241,9 @@ def datasets_values():
 @FLASK.route("/datasets/merged/stat")
 def stats():
     data_interface = parsers.DatasetParser(None)
-    key = request.args.get('firstId') + request.args.get('secondId') + request.args.get('index1') + request.args.get('index2')
+    key = request.args.get('key')
 
     data_interface.file_data = list(merged_datasets_cache[key])
-
     dataset = {
             'id':key,
             'name': "Merged Set.csv",
