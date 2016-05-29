@@ -9,6 +9,7 @@ from src import DB, FLASK
 from src.mod_suggest.models import Dataset
 
 from flask import request
+from flask import make_response
 
 @FLASK.route('/')
 def root():
@@ -18,6 +19,32 @@ def root():
 def static_proxy(path):
   # send_static_file will guess the correct MIME type
   return FLASK.send_static_file(path)
+
+@FLASK.route('/download')
+def download():
+
+    id = request.args.get('gid')
+    dataset = Dataset.query.get(id)
+    uploads = os.path.realpath(dataset.path)
+    csv = open(uploads, 'r').read()
+    response = make_response(csv)
+    # This is the key: Set the right header for the response
+    # to be downloaded, instead of just printed on the browser
+    response.headers["Content-Disposition"] = "attachment; filename=" + dataset.name
+    return response
+
+@FLASK.route('/classifier/download')
+def download_clf():
+
+    id = request.args.get('gid')
+    dataset = Dataset.query.get(id)
+    path = os.path.realpath('src/mod_suggest/datasets/my_model.pkl')
+
+    csv = open(path, 'r').read()
+    response = make_response(csv)
+
+    response.headers["Content-Disposition"] = "attachment; filename=" + dataset.name
+    return response
 
 @FLASK.route("/delete-datasets")
 def delete_dataset_info():

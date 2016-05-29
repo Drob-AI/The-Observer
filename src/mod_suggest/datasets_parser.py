@@ -131,7 +131,7 @@ class DatasetParser:
         dataset_info['regressionData'] = []
 
         transposed = [self._parse_row(field) for field in np.array(self.file_data).T]
-        print(transposed)
+        # print(transposed)
         all_number_sets = filter(lambda feature: all([isinstance(x, numbers.Number) for x in feature]), transposed)
 
         number_rows_stats = filter(lambda x: x['type'] == 'number', dataset_info['statstics'])

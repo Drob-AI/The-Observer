@@ -3,28 +3,52 @@
         <div class="col-md-12 fixed-height" data-ng-if="isSingleField()">
             <div class="row fixed-height">
                 <div class="col-md-4 fixed-height right-separator">
-                    <div class="row a-bit-down underline">
-                        <div class="col-md-6">
-                            <h4><b>Field Name:</b></h4>
+                    <div class="row underline">
+                        <div class="col-md-5">
+                            <h4 style="font-size:24px"><b>Field Name:</b></h4>
                         </div>
-                        <div class="col-md-6">
-                            <h4>{{fields[selectedFields.firstField]}}</h4>
+                        <div class="col-md-7">
+                            <h4 style="font-size:24px">{{fields[selectedFields.firstField]}}</h4>
                         </div>
                     </div>
                     <div class="row underline">
-                        <div class="col-md-6">
-                            <h4><b>Field Type:</b></h4>
+                        <div class="col-md-5" style="font-size:24px">
+                            <h4 style="font-size:24px"><b>Field Type:</b></h4>
                         </div>
-                        <div class="col-md-6">
-                            <h4>{{statistics[selectedFields.firstField].type}}</h4>
+                        <div class="col-md-7" style="font-size:24px">
+                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].type}}</h4>
                         </div>
                     </div>
-                    <div class="row underline">
-                        <div class="col-md-6">
-                            <h4><b>Field Mode:</b></h4>
+                    <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'number'">
+                        <div class="col-md-5">
+                            <h4 style="font-size:24px"><b>Minimum:</b></h4>
                         </div>
-                        <div class="col-md-6">
-                            <h4>Froinden</h4>
+                        <div class="col-md-7">
+                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].min}}</h4>
+                        </div>
+                    </div>
+                    <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'number'">
+                        <div class="col-md-5">
+                            <h4 style="font-size:24px"><b>Maximum:</b></h4>
+                        </div>
+                        <div class="col-md-7">
+                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].max}}</h4>
+                        </div>
+                    </div>
+                    <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'number'">
+                        <div class="col-md-5">
+                            <h4 style="font-size:24px"><b>Variance:</b></h4>
+                        </div>
+                        <div class="col-md-7" ng-if="statistics[selectedFields.firstField].type === 'number'">
+                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].variance}}</h4>
+                        </div>
+                    </div>
+                    <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'number'">
+                        <div class="col-md-5">
+                            <h4 style="font-size:24px"><b>Average:</b></h4>
+                        </div>
+                        <div class="col-md-7">
+                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].mean}}</h4>
                         </div>
                     </div>
                 </div>
