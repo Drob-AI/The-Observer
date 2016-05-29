@@ -388,12 +388,15 @@ header .header-content a.tab:hover div {
 }
 
 .field-selector .fields {
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	height: 100%;
+	overflow-y: scroll;
 }
 
 .field-selector .field {
 	font-size: 20px;
+	display: inline-block;
 	background: #032331;
 	border: 2px solid #103B4E;
 	padding: 8px;

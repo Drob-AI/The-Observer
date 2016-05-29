@@ -4,7 +4,7 @@ angular.module('observer').
         $scope.datasets = datasets;
         console.log(datasets);
         $scope.selectedFields = {
-            firstField: null,
+            firstField: 0,
             secondField: null
         }
     }]);
