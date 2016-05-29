@@ -557,3 +557,25 @@ form.compare .container .row .col-md-4 .form-group > .form-control {
 	height: 1.7em;
 	margin-bottom: 20px;
 }
+
+.compare-action {
+	height: 320px;
+}
+
+.compare-action button {
+	display: block;
+	width: 362px;
+	margin-top: 60px;
+	height: 200px;
+	background: #27566B;
+	font-size: 36px;
+	border: 1px solid #7197A8;
+	margin: auto;
+}
+
+.valueSelector {
+	padding: 15px 0px;
+	height: 330px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}

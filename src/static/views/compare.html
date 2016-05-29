@@ -1,10 +1,11 @@
 <div>
     <form class="light compare">
         <div class="container">
-            <div class="row">
+            <div class="row primary">
                 <div class="col-md-4">
                     <div class="form-group">
                         <select data-ng-model="primaryKey" class="form-control">
+                            <option selected value="{{null}}">Select Field</option>
                             <option data-ng-repeat="field in mainDataset.fields | filter:isMainString" value="{{mainFieldIndex(field)}}">{{field}}</option>
                         </select>
                     </div>
@@ -15,6 +16,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <select data-ng-model="remoteKey" class="form-control">
+                            <option selected value="{{null}}">Select Field</option>
                             <option data-ng-repeat="field in auxDataset.fields | filter:isAuxString" value="{{auxFieldIndex(field)}}">{{field}}</option>
                         </select>
                     </div>
@@ -25,17 +27,17 @@
 
     <form class="medium-dark compare padded">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row medium-light">
+                <div class="col-md-6 valueSelector">
                     <div data-ng-if="showStepTwo()">
                         <div data-ng-repeat="key in mainValues[primaryKey]" class="form-group">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-4 text-center">
                                     <label for="value_{{$index}}">{{key}}</label>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-7">
                                     <select id="value_{{$index}}" data-ng-model="bindings[$index]" class="form-control">
-                                        <option selected value="{{null}}"></option>
+                                        <option selected value="{{null}}">Select Field Value</option>
                                         <option data-ng-repeat="value in auxValues[remoteKey]" value="{{$index}}">{{value}}</option>
                                     </select>
                                 </div>
@@ -56,6 +58,14 @@
             </div>
         </div>
     </form>
-    <button data-ng-click="submitData()"> Merge Data Sets</button>
+    <div class="dark padded compare-action">
+        <div  class="container fixed-width">
+            <div style="padding: 15px 0px" class="row medium-light engage-container">
+                <div class="col-md-12">
+                    <button data-ng-click="submitData()">Merge Data Sets</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
