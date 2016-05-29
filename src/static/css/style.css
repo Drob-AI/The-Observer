@@ -465,3 +465,40 @@ div.jqcloud span.w4, div.jqcloud span.w3, div.jqcloud span.w2, div.jqcloud span.
 .datachart .col-md-6 {
 	padding: 0;
 }
+
+.relations .container-fluid {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.relations .dataset-selector.empty {
+	height: 90px;
+	margin-top: 0px;
+	padding: 0;
+    box-shadow: none;
+}
+
+.relations .container-fluid .container {
+	width: 100%
+	margin: inherit 0;
+}
+
+.field-overview h4 {
+	margin: 5px 0px;
+}
+
+.btn {
+	font-size: 24px !important;
+	padding: 3px !important;
+}
+
+.btn.btn-success {
+	background: #032331;
+	color: #7197A8;
+}
+
+.btn.btn-default {
+	background: #27566B;
+	color: #506078;
+}

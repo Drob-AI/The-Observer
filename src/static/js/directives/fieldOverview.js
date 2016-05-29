@@ -1,15 +1,18 @@
 angular.module('observer').
-    directive('fieldOverview', [function () {
+    directive('fieldOverview', ['$timeout', function ($timeout) {
         return {
             restrict: 'A',
             scope: {
                 fields: '=',
                 statistics: '=',
-                selectedFields: '='
+                selectedFields: '=',
+                staticTest: '=',
+                id: '='
             },
             replace: true,
             templateUrl: 'views/fieldOverview.html',
             controller: ['$scope', function ($scope) {
+                console.log($scope.staticTest);
                 $scope.colors = [
                     '#7197A8',
                     '#506078',
@@ -67,6 +70,16 @@ angular.module('observer').
 
                 $scope.showOverview = function () {
                     return $scope.isSingleField() || $scope.isFieldComparison();
+                }
+
+                $scope.createML = function () {
+                    var fieldId = $scope.selectedFields.firstField;
+                    var statistics = $scope.statistics;
+                    var fieldStatistics = $scope.statistics[fieldId];
+
+                    $timeout(function () {
+                        fieldStatistics.ML.created = true;
+                    }, 1500);
                 }
             }]
         };

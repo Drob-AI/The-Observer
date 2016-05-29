@@ -4,6 +4,7 @@ angular.module('observer').
             restrict: 'A',
             scope: {
                 fields: '=',
+                statistics: '=',
                 selectedFields: '=',
             },
             replace: true,
@@ -35,7 +36,9 @@ angular.module('observer').
                         }
                     } else if (!_.isNumber($scope.selectedFields.firstField)) {
                         $scope.selectedFields.firstField = idx;
-                    } else if (!_.isNumber($scope.selectedFields.secondField)) {
+                    } else if (!_.isNumber($scope.selectedFields.secondField) &&
+                        $scope.statistics[idx].type === 'number' &&
+                        $scope.statistics[$scope.selectedFields.firstField].type === 'number') {
                         $scope.selectedFields.secondField = idx;
                     }
                 }
