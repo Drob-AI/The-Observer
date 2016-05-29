@@ -16,14 +16,18 @@ class Dataset(Base):
     source = DB.Column(DB.Text(), nullable=False)
     date = DB.Column(DB.Float(), nullable=False)
     path = DB.Column(DB.Text(), nullable=False)
+    personal =  DB.Column(DB.Boolean(), nullable=False)
+    userSubmitted = DB.Column(DB.Boolean(), nullable=False)
 
     # New instance instantiation procedure
-    def __init__(self, name, description, source, path, date):
+    def __init__(self, name, description, source, path, date, personal, userSubmitted):
         self.name = name
         self.description = description
         self.source = source
         self.date = date
         self.path = path
+        self.personal= personal
+        self.userSubmitted = userSubmitted
 
     def to_dict(self):
         return dict(id=self.id,
@@ -31,7 +35,9 @@ class Dataset(Base):
                     description=self.description,
                     source=self.source,
                     path=self.path,
-                    date=self.date)
+                    date=self.date,
+                    personal=self.personal,
+                    userSubmitted=self.userSubmitted)
 
 # DB.drop_all()
 DB.create_all()
