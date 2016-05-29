@@ -5,21 +5,28 @@
 			<div data-dataset-selector
 			     data-dataset="dataset1"
 			     data-datasets="datasets"></div>
-
-			<div data-dataset-overview
-			     data-ng-if="dataset1"
-			     data-dataset="dataset1"></div>
 		</div>
 
 		<div class="col-md-6">
 			<div data-dataset-selector
 			     data-dataset="dataset2"
 			     data-datasets="datasets"></div>
-
-			<div data-dataset-overview
-			     data-ng-if="dataset2"
-			     data-dataset="dataset2"></div>
 		</div>
 
+	</div>
+</div>
+<div class="turbo dark">
+	<div class="container medium-dark fixed-height">
+		<div class="col-md-12 text-center">
+			<h2>Select key fields by which to match your datasets</h2>
+		</div>
+	</div>
+</div>
+
+<div data-compare data-main-dataset="dataset1" data-aux-dataset="dataset2"></div>
+
+<div class="veil" data-ng-class="{'lifted': dataset1 && dataset2}">
+	<div class="message">
+		Select two datasets and build your own.
 	</div>
 </div>
