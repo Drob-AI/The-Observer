@@ -3,6 +3,7 @@ angular.module('observer').
         $scope.dataset = datasets[0]
         $scope.datasets = datasets;
         console.log(datasets)
+        $scope.merged = true
         _.each(datasets, function (dataset) {
             dataset.regressionData = [];
             _.each(dataset.statstics, function (statistics, idx) {
