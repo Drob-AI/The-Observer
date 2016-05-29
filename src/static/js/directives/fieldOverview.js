@@ -1,12 +1,13 @@
 angular.module('observer').
-    directive('fieldOverview', [function () {
+    directive('fieldOverview', ['$timeout', function ($timeout) {
         return {
             restrict: 'A',
             scope: {
                 fields: '=',
                 statistics: '=',
                 selectedFields: '=',
-                staticTest: '='
+                staticTest: '=',
+                id: '='
             },
             replace: true,
             templateUrl: 'views/fieldOverview.html',
@@ -69,6 +70,16 @@ angular.module('observer').
 
                 $scope.showOverview = function () {
                     return $scope.isSingleField() || $scope.isFieldComparison();
+                }
+
+                $scope.createML = function () {
+                    var fieldId = $scope.selectedFields.firstField;
+                    var statistics = $scope.statistics;
+                    var fieldStatistics = $scope.statistics[fieldId];
+
+                    $timeout(function () {
+                        fieldStatistics.ML.created = true;
+                    }, 1500);
                 }
             }]
         };

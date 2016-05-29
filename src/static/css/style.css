@@ -469,3 +469,18 @@ div.jqcloud span.w4, div.jqcloud span.w3, div.jqcloud span.w2, div.jqcloud span.
 .field-overview h4 {
 	margin: 5px 0px;
 }
+
+.btn {
+	font-size: 24px !important;
+	padding: 3px !important;
+}
+
+.btn.btn-success {
+	background: #032331;
+	color: #7197A8;
+}
+
+.btn.btn-default {
+	background: #27566B;
+	color: #506078;
+}

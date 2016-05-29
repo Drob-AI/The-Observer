@@ -11,8 +11,8 @@
                             <h4 style="font-size:22px">{{fields[selectedFields.firstField]}}</h4>
                         </div>
                     </div>
-                    <div class="row underline">
-                        <div class="col-md-5" style="font-size:22px">
+                    <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'string'">
+                        <div class="col-md-5"  style="font-size:22px">
                             <h4 style="font-size:22px"><b>Field Type:</b></h4>
                         </div>
                         <div class="col-md-7" style="font-size:22px">
@@ -51,11 +51,13 @@
                             <h4 style="font-size:22px">{{statistics[selectedFields.firstField].mean}}</h4>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: 8px">
                         <div class="col-md-12">
-                            <i>Created a {{type}} with {{precission}} {{metric}}</i>
-                            <button type="button" class="btn btn-primary">Buy {{type}}</button>
-                            <button type="button" class="btn btn-primary">Buy Dataset</button>
+                            <a style=" border-radius: 0;" data-ng-if="!statistics[selectedFields.firstField].ML.created" data-ng-click="createML()" type="button" class="btn btn-info btn-block">Create {{statistics[selectedFields.firstField].ML.type}}</a>
+                            <div style="text-align: center;" data-ng-if="statistics[selectedFields.firstField].ML.created">
+                                <a target="_blank" href="/classifier/download" type="button" style="border-radius: 0;" class="btn btn-success btn-block">Buy {{statistics[selectedFields.firstField].ML.type}} with {{statistics[selectedFields.firstField].ML.precission}} {{statistics[selectedFields.firstField].ML.metric}}</a>
+                            </div>
+                            <a target="_blank" href="/download?gid={{id}}" type="button" style="margin-top: 8px; border-radius: 0" class="btn btn-success btn-block">Buy Dataset</a>
                         </div>
                     </div>
                 </div>
