@@ -5,50 +5,57 @@
                 <div class="col-md-4 fixed-height right-separator">
                     <div class="row underline">
                         <div class="col-md-5">
-                            <h4 style="font-size:24px"><b>Field Name:</b></h4>
+                            <h4 style="font-size:22px"><b>Field Name:</b></h4>
                         </div>
                         <div class="col-md-7">
-                            <h4 style="font-size:24px">{{fields[selectedFields.firstField]}}</h4>
+                            <h4 style="font-size:22px">{{fields[selectedFields.firstField]}}</h4>
                         </div>
                     </div>
                     <div class="row underline">
-                        <div class="col-md-5" style="font-size:24px">
-                            <h4 style="font-size:24px"><b>Field Type:</b></h4>
+                        <div class="col-md-5" style="font-size:22px">
+                            <h4 style="font-size:22px"><b>Field Type:</b></h4>
                         </div>
-                        <div class="col-md-7" style="font-size:24px">
-                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].type}}</h4>
+                        <div class="col-md-7" style="font-size:22px">
+                            <h4 style="font-size:22px">{{statistics[selectedFields.firstField].type}}</h4>
                         </div>
                     </div>
                     <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'number'">
                         <div class="col-md-5">
-                            <h4 style="font-size:24px"><b>Minimum:</b></h4>
+                            <h4 style="font-size:22px"><b>Minimum:</b></h4>
                         </div>
                         <div class="col-md-7">
-                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].min}}</h4>
+                            <h4 style="font-size:22px">{{statistics[selectedFields.firstField].min}}</h4>
                         </div>
                     </div>
                     <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'number'">
                         <div class="col-md-5">
-                            <h4 style="font-size:24px"><b>Maximum:</b></h4>
+                            <h4 style="font-size:22px"><b>Maximum:</b></h4>
                         </div>
                         <div class="col-md-7">
-                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].max}}</h4>
+                            <h4 style="font-size:22px">{{statistics[selectedFields.firstField].max}}</h4>
                         </div>
                     </div>
                     <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'number'">
                         <div class="col-md-5">
-                            <h4 style="font-size:24px"><b>Variance:</b></h4>
+                            <h4 style="font-size:22px"><b>Variance:</b></h4>
                         </div>
                         <div class="col-md-7" ng-if="statistics[selectedFields.firstField].type === 'number'">
-                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].variance}}</h4>
+                            <h4 style="font-size:22px">{{statistics[selectedFields.firstField].variance}}</h4>
                         </div>
                     </div>
                     <div class="row underline" ng-if="statistics[selectedFields.firstField].type === 'number'">
                         <div class="col-md-5">
-                            <h4 style="font-size:24px"><b>Average:</b></h4>
+                            <h4 style="font-size:22px"><b>Average:</b></h4>
                         </div>
                         <div class="col-md-7">
-                            <h4 style="font-size:24px">{{statistics[selectedFields.firstField].mean}}</h4>
+                            <h4 style="font-size:22px">{{statistics[selectedFields.firstField].mean}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <i>Created a {{type}} with {{precission}} {{metric}}</i>
+                            <button type="button" class="btn btn-primary">Buy {{type}}</button>
+                            <button type="button" class="btn btn-primary">Buy Dataset</button>
                         </div>
                     </div>
                 </div>
