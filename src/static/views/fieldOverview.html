@@ -8,7 +8,7 @@
                             <h4><b>Field Name:</b></h4>
                         </div>
                         <div class="col-md-6">
-                                <h4>{{fields[selectedFields.firstField]}}</h4>
+                            <h4>{{fields[selectedFields.firstField]}}</h4>
                         </div>
                     </div>
                     <div class="row underline">
@@ -16,7 +16,7 @@
                             <h4><b>Field Type:</b></h4>
                         </div>
                         <div class="col-md-6">
-                                <h4>{{fieldTypes[selectedFields.firstField]}}</h4>
+                            <h4>{{statistics[selectedFields.firstField].type}}</h4>
                         </div>
                     </div>
                     <div class="row underline">
@@ -24,12 +24,12 @@
                             <h4><b>Field Mode:</b></h4>
                         </div>
                         <div class="col-md-6">
-                                <h4>Froinden</h4>
+                            <h4>Froinden</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8 fixed-height dark" data-ng-if="isString(selectedFields.firstField)">
-                    <jqcloud words="words" colors="{{colors}}" width="600" height="220" steps="4" font-size="{from:0.06, to:0.03}" center='{x: 0.5, y:0.5}' shape='elliptic'></jqcloud>
+                    <jqcloud words="statistics[selectedFields.firstField].histogram" colors="{{colors}}" width="600" height="220" steps="4" font-size="{from:0.06, to:0.03}" center='{x: 0.5, y:0.5}' shape='elliptic'></jqcloud>
                 </div>
             </div>
         </div>

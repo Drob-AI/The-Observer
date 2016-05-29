@@ -9,7 +9,7 @@
 		</div>
 		<div data-ng-if="selected" class="selected" data-ng-click="toggleMenu()">
 			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
-			{{selected.name}}
+			{{niceName(selected)}}
 			<span class="glyphicon" data-ng-class="glyphMenuClass()" aria-hidden="true"></span>
 		</div>
 		<div class="datasets" data-ng-class="{'visible': expanded}">
@@ -28,7 +28,7 @@
 				data-ng-click="selectDataset(dataset)">
 				<div class="row">
 					<div class="col-md-3">
-						<span>{{dataset.name}}</span>
+						<span>{{niceName(dataset)}}</span>
 					</div>
 					<div class="col-md-6 description">
 						<span>{{dataset.description}}</span>

@@ -99,13 +99,20 @@ angular.module('observer').
             return $http({
                 method: 'GET',
                 url: 'http://localhost:5000/datasets/all'
-            }).then(function (aaaa) {
-                return aaaa.data;
+            }).then(function (datasetsMetadata) {
+                return $q.all(_.map(datasetsMetadata.data, function (metadata) {
+                    return getById(metadata.id).then(function (dataset) {
+                        return dataset.data;
+                    });
+                }));
             });
         }
 
         function getById(id) {
-            return $q.when(_.pluck(datasets, {id: id}));
+            return $http({
+                method: 'GET',
+                url: 'http://localhost:5000/dataset?id=' + id
+            });
         }
 
         return {

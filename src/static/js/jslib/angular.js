@@ -1317,6 +1317,7 @@ function toJson(obj, pretty) {
  * @returns {Object|Array|string|number} Deserialized JSON string.
  */
 function fromJson(json) {
+  json = json.replace(new RegExp('NaN', 'g'), 'null');
   return isString(json)
       ? JSON.parse(json)
       : json;

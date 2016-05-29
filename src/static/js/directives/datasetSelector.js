@@ -9,6 +9,18 @@ angular.module('observer').
             replace: true,
             templateUrl: 'views/datasetSelector.html',
             controller: ['$scope', function ($scope) {
+                $scope.niceName = function (dataset) {
+                    var name = dataset.name;
+                    var words = name.split(' ');
+                    var result = '';
+                    for (var i = 0; i < words.length; i++) {
+                        if((result + ' ' + words[i]).length < 25) {
+                            result += ' ' + words[i];
+                        }
+                    }
+                    return result.trim();
+                }
+
                 $scope.personalFilter = function (dataset) {
                     return dataset.personal;
                 }

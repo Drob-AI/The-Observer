@@ -4,8 +4,7 @@ angular.module('observer').
             restrict: 'A',
             scope: {
                 fields: '=',
-                fieldTypes: '=',
-                statstics: '=',
+                statistics: '=',
                 selectedFields: '='
             },
             replace: true,
@@ -59,11 +58,11 @@ angular.module('observer').
                 }
 
                 $scope.isString = function(field) {
-                    return $scope.fieldTypes[field] === 'string';
+                    return $scope.statistics[field].type === 'string';
                 }
 
                 $scope.isNumber = function(field) {
-                    return $scope.fieldTypes[field] === 'number';
+                    return $scope.statistics[field].type === 'number';
                 }
 
                 $scope.showOverview = function () {
