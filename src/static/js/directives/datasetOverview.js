@@ -3,7 +3,8 @@ angular.module('observer').
         return {
             restrict: 'A',
             scope: {
-                dataset: '='
+                dataset: '=',
+                merged: '='
             },
             replace: true,
             templateUrl: 'views/datasetOverview.html',

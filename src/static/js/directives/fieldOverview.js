@@ -8,7 +8,8 @@ angular.module('observer').
                 selectedFields: '=',
                 staticTest: '=',
                 id: '=',
-                merged: '='
+                merged: '=',
+                personal: '='
             },
             replace: true,
             templateUrl: 'views/fieldOverview.html',

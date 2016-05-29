@@ -3,7 +3,8 @@ angular.module('observer').
         return {
             restrict: 'A',
             scope: {
-                dataset: '='
+                dataset: '=',
+
             },
             replace: true,
             templateUrl: 'views/heatmap.html',
