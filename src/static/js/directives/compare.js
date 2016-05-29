@@ -46,7 +46,7 @@ angular.module('observer').
                         })) {
                             return null
                         }
-                        if (value.length < 40) {
+                        if (value.length < 100) {
                             return _.sortBy(value, function (a) {
                                 return a;
                             });
