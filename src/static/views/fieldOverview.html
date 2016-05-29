@@ -61,7 +61,14 @@
             </div>
         </div>
         <div class="col-md-12" data-ng-if="isFieldComparison()">
-            Compare
+            <div class="row fixed-height">
+                <div class="col-md-6 fixed-height medium-light">
+                    {{staticTest[selectedFields.firstField + selectedFields.secondField  * fields.length][0]}}
+                </div>
+                <div class="col-md-6 fixed-height dark">
+                    {{staticTest[selectedFields.firstField + selectedFields.secondField  * fields.length][1]}}
+                </div>
+            </div>
         </div>
     </div>
 </div>
