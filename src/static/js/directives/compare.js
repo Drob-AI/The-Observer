@@ -46,6 +46,7 @@ angular.module('observer').
                         })) {
                             return null
                         }
+
                         if (value.length < 40) {
                             return value;
                         }
