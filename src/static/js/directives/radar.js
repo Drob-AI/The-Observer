@@ -27,7 +27,7 @@ angular.module('observer').
                         "shadow":false
                     },
                         "type" : "radar",
-                        "background-color":"#FFF",
+                        "background-color":"#467488",
                         "plot":{
                         "aspect":"rose",
                         "animation": {
@@ -40,7 +40,7 @@ angular.module('observer').
                             "y":"15px",
                             "x":"-10px",
                         "text" : "Standard Deviation of attributes",
-                        "font-color":"#05636c",
+                        "font-color":"#ffffff",
                         "font-size":"24px",
                             "height":"25px"
                         },
@@ -53,10 +53,10 @@ angular.module('observer').
                         "guide": {
                         "line-width":1,
                         "line-style":"solid",
-                        "line-color":"#333"
+                        "line-color":"#ffffff"
                         },
                         "item": {
-                        "color":"#333"
+                        "color":"#ffffff"
                         },
                         "line-color":"#FFF"
                     },
@@ -73,7 +73,7 @@ angular.module('observer').
                                 //"tooltip-text" : "%v studio albums made by %data-band",
                                 "url" : "http://www.google.com/#q=%data-band",
                                 "target" : "_blank",
-                                "background-color":"#7197A8"
+                                "background-color":"#333"
                             }
                         ]
                     };
