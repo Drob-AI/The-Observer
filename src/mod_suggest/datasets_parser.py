@@ -4,6 +4,8 @@ import sys
 import numpy as np
 import numbers
 from scipy import stats
+from sklearn import preprocessing
+
 class DatasetParser:
     def __init__(self, file_path):
         if(file_path):
@@ -82,6 +84,21 @@ class DatasetParser:
     #         or (partition[0].isdigit()
     #         and partition[1]=='.'
     #         and partition[2]==''))
+    def rows_for_classifiers(self):
+        transposed = np.array(self.file_data).T
+        transposed_for_classifiers = []
+        labeler = preprocessing.LabelEncoder()
+        for i,column in enumerate(transposed):
+            if(self.stats[i]['type'] == 'string'):
+                labeler = preprocessing.LabelEncoder()
+                labeler.fit(column[1:])
+                transposed_for_classifiers.append(labeler.transform(column[1:]))
+            else:
+                transposed_for_classifiers.append(column)
+
+        return np.array(transposed_for_classifiers).T
+    def calculate_stats(self):
+        self.stats = self._calculate_statistics()
 
     def _is_float(self, field):
         try:

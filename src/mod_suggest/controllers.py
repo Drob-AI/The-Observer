@@ -1,6 +1,7 @@
 import datetime
 import os
 import src.mod_suggest.datasets_parser as parsers
+import src.mod_suggest.tree_trainer as TreeTrainer
 import time
 import json
 # Import the database object from the main app module
@@ -43,8 +44,14 @@ def download_clf():
     dataset = Dataset.query.get(id)
     path = os.path.realpath('src/mod_suggest/datasets/my_model.pkl')
 
+    data_interface = parsers.DatasetParser( os.path.realpath(dataset.path))
+    data_interface.calculate_stats()
+    print(data_interface.rows_for_classifiers())
+    TreeTrainer.train_classifier_tree(data_interface.rows_for_classifiers(), 0)
+
     csv = open(path, 'r').read()
     response = make_response(csv)
+
 
     response.headers["Content-Disposition"] = "attachment; filename=" + dataset.name
     return response
@@ -133,6 +140,7 @@ def find_dataset_info():
 
     data_interface = parsers.DatasetParser( os.path.realpath(dataset.path))
     return data_interface.dataset_to_json(dataset.to_dict())
+
 
 def megre_file_datas(file_data1, file_data2, value_1, value_2, mappings):
     header1 = file_data1[0]
