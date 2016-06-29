@@ -1,7 +1,11 @@
 import random
 import numpy as np
 from sklearn import tree
+from sklearn import neighbors
+from sklearn import grid_search
 from sklearn.metrics import accuracy_score
+from sklearn.grid_search import GridSearchCV
+from sklearn import cross_validation
 
 def split_sets(dataset, test_set_len):
     test_set = []
@@ -38,3 +42,33 @@ def train_classifier_tree(dataset, feature_index):
 
 
     print(len(test_set), len(train_set))
+
+def train_knn(dataset, feature_index):
+    test_set, train_set = split_sets(dataset, 0.1)
+    x_train, y_train = split_train_result_set(train_set, feature_index)
+    x_train_test, y_train_test = split_train_result_set(test_set, feature_index)
+
+    knn = neighbors.KNeighborsClassifier()
+    knn = knn.fit(x_train, y_train)
+
+
+    print(accuracy_score(knn.predict(x_train_test), y_train_test))
+
+    print(len(test_set), len(train_set))
+
+
+def train_knn2(dataset, feature_index):
+    test_set, train_set = split_sets(dataset, 0.1)
+    x_train, y_train = split_train_result_set(train_set, feature_index)
+    x_train_test, y_train_test = split_train_result_set(test_set, feature_index)
+
+    nFolds = 4
+    metrics = ['minkowski','euclidean','manhattan']
+    weights = ['uniform','distance']
+    numNeighbors = np.arange(5, 10)
+    param_grid = dict(metric=metrics,weights=weights,n_neighbors=numNeighbors)
+    cv = cross_validation.StratifiedKFold(y_train, nFolds)
+    grid = GridSearchCV(neighbors.KNeighborsClassifier(), param_grid=param_grid,cv=cv)
+    grid.fit(x_train, y_train)
+
+    print(accuracy_score(grid.predict(x_train_test), y_train_test))
