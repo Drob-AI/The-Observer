@@ -41,21 +41,27 @@ def download():
 def download_clf():
 
     id = request.args.get('gid')
+    index = int(request.args.get('index'))
     dataset = Dataset.query.get(id)
     path = os.path.realpath('src/mod_suggest/datasets/my_model.pkl')
 
     data_interface = parsers.DatasetParser( os.path.realpath(dataset.path))
     data_interface.calculate_stats()
-    print(data_interface.rows_for_classifiers())
-    # TreeTrainer.train_classifier_tree(data_interface.rows_for_classifiers(), 1)
-    TreeTrainer.train_knn2(data_interface.rows_for_classifiers(), 1)
+    # print(data_interface.rows_for_classifiers())
+    print('=============Tree====================')
+    TreeTrainer.train_classifier_tree(data_interface.rows_for_classifiers(), index, data_interface.stats)
+    TreeTrainer.train_classifier_tree2(data_interface.rows_for_classifiers(), index, data_interface.stats)
+    print('=============KNN====================')
+    TreeTrainer.train_knn(data_interface.rows_for_classifiers(), index, data_interface.stats)
+    TreeTrainer.train_knn2(data_interface.rows_for_classifiers(), index, data_interface.stats)
 
     csv = open(path, 'r').read()
     response = make_response(csv)
 
 
     response.headers["Content-Disposition"] = "attachment; filename=" + dataset.name
-    return response
+    # return response
+    return 'success'
 
 @FLASK.route("/delete-datasets")
 def delete_dataset_info():

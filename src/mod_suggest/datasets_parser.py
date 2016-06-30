@@ -91,13 +91,18 @@ class DatasetParser:
         for i,column in enumerate(transposed):
             if(self.stats[i]['type'] == 'string'):
                 labeler = preprocessing.LabelEncoder()
-                labeler.fit(column[1:])
-                transposed_for_classifiers.append(labeler.transform(column[1:]))
+                labeler.fit(column)
+                transposed_for_classifiers.append(labeler.transform(column))
             else:
+                for j,val in enumerate(column):
+                    if(str(val) == 'nan'):
+                        column[j] = 0.0
+
                 transposed_for_classifiers.append(column)
 
         return np.array(transposed_for_classifiers).T
     def calculate_stats(self):
+        del self.file_data[0]
         self.stats = self._calculate_statistics()
 
     def _is_float(self, field):
