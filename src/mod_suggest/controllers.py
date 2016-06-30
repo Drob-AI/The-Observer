@@ -47,6 +47,7 @@ def download_clf():
 
     data_interface = parsers.DatasetParser( os.path.realpath(dataset.path))
     data_interface.calculate_stats()
+
     # print(data_interface.rows_for_classifiers())
     print('=============Tree====================')
     TreeTrainer.train_classifier_tree(data_interface.rows_for_classifiers(), index, data_interface.stats)
@@ -54,6 +55,9 @@ def download_clf():
     print('=============KNN====================')
     TreeTrainer.train_knn(data_interface.rows_for_classifiers(), index, data_interface.stats)
     TreeTrainer.train_knn2(data_interface.rows_for_classifiers(), index, data_interface.stats)
+    print('=============SVM====================')
+    TreeTrainer.train_classifier_svm(data_interface.rows_for_classifiers(), index, data_interface.stats)
+    TreeTrainer.train_classifier_svm2(data_interface.rows_for_classifiers(), index, data_interface.stats)
 
     csv = open(path, 'r').read()
     response = make_response(csv)
